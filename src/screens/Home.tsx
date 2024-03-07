@@ -25,8 +25,12 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
 import { styled } from "nativewind";
+
 import dataAvatar from "../mocks/dataAvatar";
 import { Avatar, AvatarImage, Box, Card } from "@gluestack-ui/themed";
+=======
+
+
 const StyledPressable = styled(Pressable);
 const Home = () => {
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
@@ -57,6 +61,7 @@ const Home = () => {
   return (
     <KeyboardAvoidingView>
       <ScrollView>
+
         <ImageBackground>
           <View className="flex-1 justify-center bg-black">
             <View className="  items-center">
@@ -84,6 +89,34 @@ const Home = () => {
                   {dataAvatar.map((data) => (
                     <StyledPressable
                       className={`
+
+        <View className="flex-1 justify-center bg-black">
+          <View className="  items-center">
+            <View className="w-3/4 items-center">
+              <View className="mt-20 items-center">
+                <Image
+                  className="w-52 -rotate-6 h-40 filter drop-shadow-2xl fill-neutral-800000"
+                  source={logo}
+                />
+                <Text className=" text-white text-[20px] font-bold ">
+                  CHOOSE YOUR AVATAR
+                </Text>
+              </View>
+              <Box
+                my={30}
+                bg="transparent"
+                display="flex"
+                flexDirection="row"
+                flexWrap="wrap"
+                gap={9}
+                p={2}
+                maxWidth={"100%"}
+                justifyContent="center"
+              >
+                {dataAvatar.map((data) => (
+                  <StyledPressable
+                    className={`
+
                   active:scale-110
                 hover:bg-slate-950
                 
