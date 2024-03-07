@@ -17,7 +17,7 @@ const Container = (props: Props) => {
       <Stack.Navigator
         screenOptions={{ headerShown: false, statusBarHidden: false }}
       >
-        <Stack.Screen name="/" component={Login} />
+        <Stack.Screen name="/" component={ProfileUser} />
         {/* <Stack.Screen name="/" component={Home} /> */}
       </Stack.Navigator>
     </>
