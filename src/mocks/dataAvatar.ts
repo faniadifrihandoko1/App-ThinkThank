@@ -10,7 +10,7 @@ const dataAvatar: Data[] = [
     },
     {
         id: 2,
-        image:"https://i.ibb.co/gwx2khL/bapakpani.png",
+        image:"https://i.ibb.co/RHjVRDv/bapaksripal.png",
     },
     {
         id: 3,
@@ -18,7 +18,7 @@ const dataAvatar: Data[] = [
     },
     {
         id: 4,
-        image: "https://i.ibb.co/gwx2khL/bapakpani.png",
+        image: "https://i.ibb.co/RHjVRDv/bapaksripal.png",
     },
     {
         id: 5,
@@ -26,7 +26,7 @@ const dataAvatar: Data[] = [
     },
     {
         id: 6,
-        image: "https://i.ibb.co/gwx2khL/bapakpani.png",
+        image: "https://i.ibb.co/RHjVRDv/bapaksripal.png",
     },
     {
         id: 7,
@@ -34,7 +34,7 @@ const dataAvatar: Data[] = [
     },
     {
         id: 8,
-        image:"https://i.ibb.co/gwx2khL/bapakpani.png",
+        image:"https://i.ibb.co/RHjVRDv/bapaksripal.png",
     },
     {
         id: 9,
@@ -42,7 +42,7 @@ const dataAvatar: Data[] = [
     },
     {
         id: 10,
-        image:"https://i.ibb.co/gwx2khL/bapakpani.png",
+        image:"https://i.ibb.co/RHjVRDv/bapaksripal.png",
     },
     {
         id: 11,
@@ -50,7 +50,7 @@ const dataAvatar: Data[] = [
     },
     {
         id: 12,
-        image:"https://i.ibb.co/gwx2khL/bapakpani.png",
+        image:"https://i.ibb.co/RHjVRDv/bapaksripal.png",
     }
 
 ]
