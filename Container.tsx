@@ -4,6 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./src/screens/Login";
 import Home from "./src/screens/Home";
+import ProfileUser from "./src/screens/ProfileUser";
+// import Test from "./src/screens/test";
+import Peh from "./src/screens/Peh";
 
 type Props = {};
 
