@@ -21,6 +21,8 @@ import {
 } from "@gluestack-ui/themed";
 
 import logo from "../../assets/logo.png";
+import bg from "../../assets/bg-2.jpeg";
+
 import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
@@ -57,8 +59,8 @@ const Home = () => {
   return (
     <KeyboardAvoidingView>
       <ScrollView>
-        <ImageBackground>
-          <View className="flex-1 justify-center bg-black">
+        <ImageBackground source={bg} className="w-full h-full">
+          <View className="flex-1 justify-center ">
             <View className="  items-center">
               <View className="w-3/4 items-center">
                 <View className="mt-20 items-center">
