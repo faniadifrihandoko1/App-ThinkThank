@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, ScrollView,} from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -17,7 +17,7 @@ const Container = (props: Props) => {
       <Stack.Navigator
         screenOptions={{ headerShown: false, statusBarHidden: false }}
       >
-        <Stack.Screen name="/" component={Login} />
+        <Stack.Screen name="/" component={Home} />
         {/* <Stack.Screen name="/" component={Home} /> */}
       </Stack.Navigator>
     </>
