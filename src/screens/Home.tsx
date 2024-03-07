@@ -16,8 +16,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Avatar, AvatarImage, Box, Card } from "@gluestack-ui/themed";
 import dataAvatar from "../mocks/dataAvatar";
 import { styled } from "nativewind";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+
 const StyledPressable = styled(Pressable);
 const Home = () => {
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
@@ -57,7 +56,7 @@ const Home = () => {
                 flexDirection="row"
                 flexWrap="wrap"
                 gap={9}
-                p={2} 
+                p={2}
                 maxWidth={"100%"}
                 justifyContent="center"
               >
