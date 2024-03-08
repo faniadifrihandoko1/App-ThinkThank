@@ -9,6 +9,8 @@ import ProfileUser from "./src/screens/ProfileUser";
 import Peh from "./src/screens/Peh";
 import LoginPage from "./src/screens/LoginPage";
 
+
+
 type Props = {};
 
 const Container = (props: Props) => {
@@ -18,7 +20,10 @@ const Container = (props: Props) => {
       <Stack.Navigator
         screenOptions={{ headerShown: false, statusBarHidden: false }}
       >
-        <Stack.Screen name="/" component={Login} />
+
+        {/* <Stack.Screen name="/" component={Home} /> */}
+        <Stack.Screen name="/profile" component={ProfileUser} />
+
         {/* <Stack.Screen name="/" component={Home} /> */}
       </Stack.Navigator>
     </>
