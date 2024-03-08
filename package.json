@@ -17,7 +17,9 @@
     "@gluestack-ui/config": "^1.1.16",
     "@gluestack-ui/themed": "^1.1.9",
     "@react-native-async-storage/async-storage": "1.21.0",
+    "@react-native-community/blur": "^4.4.0",
     "@react-native-google-signin/google-signin": "^11.0.0",
+    "@react-navigation/bottom-tabs": "^6.5.16",
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/native-stack": "^6.9.22",
     "axios": "^1.6.7",
@@ -32,6 +34,8 @@
     "react-native": "0.73.4",
     "react-native-async-storage": "^0.0.1",
     "react-native-elements": "^3.4.3",
+    "react-native-linear-gradient": "^2.8.3",
+    "react-native-paper": "^5.12.3",
     "react-native-svg": "^13.4.0",
     "react-native-web": "~0.19.6"
   },

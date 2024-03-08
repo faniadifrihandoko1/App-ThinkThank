@@ -20,11 +20,14 @@ import {
   SafeAreaView,
   ScrollView,
   KeyboardAvoidingView,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
-import { Box, Image } from "@gluestack-ui/themed";
+import { Box, Card, Image } from "@gluestack-ui/themed";
 import {
   Button,
+  Input,
+  InputSlot,
+  InputField,
   ButtonText,
   ButtonIcon,
   ButtonSpinner,
@@ -32,7 +35,10 @@ import {
   Avatar,
   AvatarImage,
 } from "@gluestack-ui/themed";
-// import { ImageBackground } from "react-native";
+
+import { BlurView } from "@react-native-community/blur";
+
+import LinearGradient from "react-native-linear-gradient";
 
 const StyledView = styled(View);
 
@@ -41,9 +47,7 @@ const ProfileUser = () => {
     <KeyboardAvoidingView>
       <ScrollView>
         <ImageBackground source={bg} className="w-full h-full">
-          <StyledView
-            className="flex-1 items-center h-screen justify-center"
-          >
+          <StyledView className="flex-1 items-center h-screen justify-center">
             <Box
               display="flex"
               flexDirection="row"
@@ -55,20 +59,39 @@ const ProfileUser = () => {
             >
               <FontAwesome5 name="user-alt" size={27} color="white" />
               <Box display="flex" flexDirection="row" width={"20%"}>
-                <TextInput
-                  className="border-2 text-[10px] my-3 text-center border-black  w-50 h-4 text-white rounded-2xl  bg-blue-700"
-                  placeholder="make a room"
-                />
+                {/* <Input borderRadius={10} borderWidth={1}  borderColor="white" marginBottom={30}>
+                  <InputField
+                    // onChange={(e: any) => setName(e.target.value)}
+                    color="white"
+                    placeholder="Enter your name"
+                  />
+                </Input> */}
+                <Text
+                  className="border-2 text-[10px] my-3 text-center border-white  w-full h-5 text-black rounded-2xl  bg-none"
+                  // placeholder="make a room"
+                >999</Text>
                 <Box style={{ position: "absolute", right: 70, bottom: 4 }}>
-                  <Ionicons name="diamond" size={30} color="white" />
+                  <Ionicons name="diamond" size={30} color="blue" />
                 </Box>
-                <Box style={{ position: "absolute", right: 10, bottom: 7 }}>
+                <Box style={{ position: "absolute", right: -2, bottom: 7 }}>
                   <Entypo name="squared-plus" size={30} color="yellow" />
                 </Box>
               </Box>
             </Box>
-            <StyledView className="rounded-t-3xl w-full -bottom-16 bg-slate-300 ">
-              <StyledView className="flex -top-10 items-center">
+            {/* <BlurView
+              style={styles.blurContainer}
+              blurType="light"
+              blurAmount={10}
+              reducedTransparencyFallbackColor="white"
+            > */}
+            <Card
+              style={styles.boxProfile}
+            >
+              {/* <LinearGradient
+                colors={["rgb(238,174,202)", "rgba(148,187,233,1)"]}
+                style={styles.gradient}
+              > */}
+              <StyledView className="flex bottom-20 items-center">
                 <Avatar size="xl">
                   <AvatarImage source={ImgLogo1} />
                 </Avatar>
@@ -78,7 +101,7 @@ const ProfileUser = () => {
                 </Text>
               </StyledView>
               <StyledView
-                className=" flex flex-col w-auto mx-8  rounded-lg"
+                className=" flex flex-col w-auto mx-8 bottom-8 rounded-lg"
                 style={{ backgroundColor: colors.MAROON }}
               >
                 {/* <StyledView className="flex flex-row bg-none">
@@ -110,110 +133,98 @@ const ProfileUser = () => {
               <MaterialIcons name="navigate-next" size={24} color="white" />
             </StyledView> */}
               </StyledView>
-              <StyledView
-                className=" my-4 flex flex-col w-auto mx-8 rounded-lg"
-                style={{ backgroundColor: colors.PURPLE }}
+              {/* <StyledView
+                className=" my-4 flex flex-col w-auto mx-8 rounded-lg bg-none"
+                // style={{ backgroundColor: colors.PURPLE }}
               >
-                <StyledView className="p-4">
-                  {/* <TextInput
-                    className="border-2 mb-3 border-black text-white rounded-2xl p-2 w-full"
-                    style={{ backgroundColor: colors.PURPLE_SOFT }}
-                    placeholder="Enter name your room"
-                  />
-                  <Pressable
-                    className="bg-white mb-4 border-spacing-4 p-1 w-full rounded-2xl"
-                    style={{ backgroundColor: colors.YELLOW }}
-                  >
-                    <View className="flex flex-row justify-center">
-                      <Text className=" color-red text-[20px] font-bold ">
-                        Buat Room
-                      </Text>
-                    </View>
-                  </Pressable> */}
+              </StyledView> */}
+                <StyledView className="p-4 mx-4">
                   <Pressable
                     className="bg-white  border-spacing-4 p-1 w-full rounded-2xl"
                     style={{ backgroundColor: colors.YELLOW }}
                   >
                     <View className="flex flex-row justify-center">
                       <Text className=" color-red text-[20px] font-bold ">
-                        Masuk room
+                        Start Game
                       </Text>
                     </View>
                   </Pressable>
                 </StyledView>
-              </StyledView>
-              <StyledView className="flex flex-between justify-around flex-row p-4 ">
-                <Button
-                  // size="md"
-                  width={70}
-                  height={60}
-                  borderRadius={12}
-                  backgroundColor={colors.DONGKER}
-                  $hover-backgroundColor={"$backgroundLight800"}
-                  // style={{  backgroundColor: colors.DONGKER }}
-                  variant="solid"
-                  action="primary"
-                  isDisabled={false}
-                  isFocusVisible={false}
-                  className="p-4 rounded-lg cursor-pointer"
-                  //   onPress={() => navigation.navigate("Home")}
-                >
-                  <FontAwesome5 name="user-alt" size={24} color="white" />
-                </Button>
-                <Button
-                  // size="md"
-                  width={70}
-                  height={60}
-                  borderRadius={12}
-                  backgroundColor={colors.DONGKER}
-                  $hover-backgroundColor={"$backgroundLight800"}
-                  // style={{  backgroundColor: colors.DONGKER }}
-                  variant="solid"
-                  action="primary"
-                  isDisabled={false}
-                  isFocusVisible={false}
-                  className="p-4 rounded-lg cursor-pointer"
-                >
-                  <FontAwesome5 name="medal" size={24} color="white" />
-                </Button>
-                <Button
-                  // size="md"
-                  width={70}
-                  height={60}
-                  borderRadius={12}
-                  backgroundColor={colors.DONGKER}
-                  $hover-backgroundColor={"$backgroundLight800"}
-                  // style={{  backgroundColor: colors.DONGKER }}
-                  variant="solid"
-                  action="primary"
-                  isDisabled={false}
-                  isFocusVisible={false}
-                  className="p-4 rounded-lg cursor-pointer"
-                >
-                  <FontAwesome6 name="shop" size={24} color="white" />
-                </Button>
-                <Button
-                  // size="md"
-                  width={70}
-                  height={60}
-                  borderRadius={12}
-                  backgroundColor={colors.DONGKER}
-                  $hover-backgroundColor={"$backgroundLight800"}
-                  // style={{  backgroundColor: colors.DONGKER }}
-                  variant="solid"
-                  action="primary"
-                  isDisabled={false}
-                  isFocusVisible={false}
-                  className="p-4 rounded-lg cursor-pointer"
-                >
-                  <MaterialCommunityIcons
-                    name="comment-question"
-                    size={24}
-                    color="white"
-                  />
-                </Button>
-              </StyledView>
-            </StyledView>
+              {/* </LinearGradient> */}
+            </Card>
+            <Box display="flex" flexDirection="row" p={10} top={60} gap={15}>
+              <Button
+                // style={styles.CardButton}
+                // size="md"
+                width={70}
+                height={60}
+                borderRadius={12}
+                backgroundColor={colors.DONGKER}
+                $hover-backgroundColor={"$backgroundLight800"}
+                // style={{  backgroundColor: colors.DONGKER }}
+                variant="solid"
+                action="primary"
+                isDisabled={false}
+                isFocusVisible={false}
+                className="p-4 rounded-lg cursor-pointer"
+                //   onPress={() => navigation.navigate("Home")}
+              >
+                <FontAwesome5 name="user-alt" size={24} color="white" />
+              </Button>
+              <Button
+                // size="md"
+                width={70}
+                height={60}
+                borderRadius={12}
+                backgroundColor={colors.DONGKER}
+                $hover-backgroundColor={"$backgroundLight800"}
+                // style={{  backgroundColor: colors.DONGKER }}
+                variant="solid"
+                action="primary"
+                isDisabled={false}
+                isFocusVisible={false}
+                className="p-4 rounded-lg cursor-pointer"
+              >
+                <FontAwesome5 name="medal" size={24} color="white" />
+              </Button>
+              <Button
+                // size="md"
+                width={70}
+                height={60}
+                borderRadius={12}
+                backgroundColor={colors.DONGKER}
+                $hover-backgroundColor={"$backgroundLight800"}
+                // style={{  backgroundColor: colors.DONGKER }}
+                variant="solid"
+                action="primary"
+                isDisabled={false}
+                isFocusVisible={false}
+                className="p-4 rounded-lg cursor-pointer"
+              >
+                <FontAwesome6 name="shop" size={24} color="white" />
+              </Button>
+              <Button
+                // size="md"
+                width={70}
+                height={60}
+                borderRadius={12}
+                backgroundColor={colors.DONGKER}
+                $hover-backgroundColor={"$backgroundLight800"}
+                // style={{  backgroundColor: colors.DONGKER }}
+                variant="solid"
+                action="primary"
+                isDisabled={false}
+                isFocusVisible={false}
+                className="p-4 rounded-lg cursor-pointer"
+              >
+                <MaterialCommunityIcons
+                  name="comment-question"
+                  size={24}
+                  color="white"
+                />
+              </Button>
+            </Box>
+            {/* </BlurView> */}
           </StyledView>
         </ImageBackground>
       </ScrollView>
@@ -222,3 +233,79 @@ const ProfileUser = () => {
 };
 
 export default ProfileUser;
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 10,
+    width: "100%",
+    marginBottom: 20,
+  },
+  buttonHovered: {
+    backgroundColor: "gray",
+  },
+  text: {
+    fontFamily: "roboto",
+    fontWeight: "bold",
+    color: "black",
+    textAlign: "center",
+    fontSize: 20,
+  },
+  layar: {
+    flex: 1,
+    resizeMode: "cover",
+    height: 900,
+  },
+  boxProfile: {
+    // backgroundColor: "",
+    // borderTopLeftRadius: 20,
+    // borderTopRightRadius: 20,
+    borderRadius:30
+  },
+  boxQuote: {
+    backgroundColor: "",
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  gradient: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  blurContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  card: {
+    width: 300,
+    height: 200,  
+    borderRadius: 10,
+    padding: 10,
+  },
+CardButton:{
+  borderRadius: 15,
+  backgroundColor: "#e0e0e0",
+  shadowColor: "#b5b5b5",
+  shadowOffset: {
+    width: 7,
+    height: 7,
+  },
+  shadowRadius: 15,
+  shadowOpacity: 0.35,
+  // box-shadow:  "-7px -7px 13px #b5b5b5",
+//   border-radius: "15px",
+// background: "#e0e0e0",
+// box-shadow:  -7px -7px 13px #b5b5b5,
+//              7px 7px 13px #ffffff, 
+}
+});

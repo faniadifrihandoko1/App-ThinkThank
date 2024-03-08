@@ -59,11 +59,11 @@ const Home = () => {
   return (
     <KeyboardAvoidingView>
       <ScrollView>
-        <ImageBackground source={bg} className="w-full h-full">
+        <ImageBackground source={bg} style={styles.layar} >
           <View className="flex-1 justify-center ">
-            <View className="  items-center">
+            <View className="items-center">
               <View className="w-3/4 items-center">
-                <View className="mt-20 items-center">
+                <View className="mt-20 items-center" >
                   <Image
                     className="w-52 -rotate-6 h-40 filter drop-shadow-2xl fill-neutral-800000"
                     source={logo}
@@ -187,6 +187,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
   },
+  layar: {
+    flex: 1,
+    resizeMode: "cover",
+    height: 900,
+  }
 });
 
 export default Home;
