@@ -7,6 +7,7 @@ import Home from "./src/screens/Home";
 import ProfileUser from "./src/screens/ProfileUser";
 // import Test from "./src/screens/test";
 import Peh from "./src/screens/Peh";
+import LoginPage from "./src/screens/LoginPage";
 
 type Props = {};
 
@@ -17,7 +18,7 @@ const Container = (props: Props) => {
       <Stack.Navigator
         screenOptions={{ headerShown: false, statusBarHidden: false }}
       >
-        <Stack.Screen name="/" component={Home} />
+        <Stack.Screen name="/" component={Login} />
         {/* <Stack.Screen name="/" component={Home} /> */}
       </Stack.Navigator>
     </>
