@@ -7,6 +7,7 @@ import Home from "./src/screens/Home";
 import ProfileUser from "./src/screens/ProfileUser";
 // import Test from "./src/screens/test";
 import Peh from "./src/screens/Peh";
+import LoginPage from "./src/screens/LoginPage";
 
 type Props = {};
 

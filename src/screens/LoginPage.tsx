@@ -1,0 +1,75 @@
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import React from "react";
+import { Box, Button, Image, Pressable } from "@gluestack-ui/themed";
+import logo from "../../assets/logo.png";
+import bg from "../../assets/bg-2.jpeg";
+
+type Props = {};
+
+const LoginPage = () => {
+  return (
+    <ImageBackground source={bg} style={styles.background}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+
+          height: "100%",
+        }}
+      >
+        <Box
+          justifyContent="center"
+          alignItems="center"
+          width={"$full"}
+          height={"$56"}
+        >
+          <Image w={"$56"} h={"$40"} alt="logo" source={logo} />
+        </Box>
+        <Box
+          width={"$full"}
+          justifyContent="center"
+          alignItems="center"
+          bottom={30}
+          position="absolute"
+        >
+          <Pressable
+            bg="white"
+            display="flex"
+            flexDirection="row"
+            px={"$4"}
+            py={"$2"}
+            rounded={"$md"}
+            justifyContent="center"
+            alignItems="center"
+            width={"$2/3"}
+            height={"$10"}
+            onPress={() => console.log("login")}
+            gap={5}
+            borderRadius={"$xl"}
+          >
+            <Image
+              alt="logo-google"
+              source={{
+                uri: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
+              }}
+              w={20}
+              h={20}
+            />
+            <Text>Continue login with google</Text>
+          </Pressable>
+        </Box>
+      </View>
+    </ImageBackground>
+  );
+};
+
+export default LoginPage;
+
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
+});
