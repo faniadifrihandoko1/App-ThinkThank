@@ -29,10 +29,16 @@ import { Feather } from "@expo/vector-icons";
 import { styled } from "nativewind";
 import dataAvatar from "../mocks/dataAvatar";
 import { Avatar, AvatarImage, Box, Card } from "@gluestack-ui/themed";
+import Background from "../components/Background";
+import SignOut from "../components/SignOut";
+import { useUser } from "@clerk/clerk-expo";
+import UserLogin from "../components/UserLogin";
 const StyledPressable = styled(Pressable);
+
 const Home = () => {
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
   const [name, setName] = React.useState("");
+  const { user } = useUser();
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -59,11 +65,11 @@ const Home = () => {
   return (
     <KeyboardAvoidingView>
       <ScrollView>
-        <ImageBackground source={bg} style={styles.layar} >
+        <Background>
           <View className="flex-1 justify-center ">
             <View className="items-center">
               <View className="w-3/4 items-center">
-                <View className="mt-20 items-center" >
+                <View className="mt-20 items-center">
                   <Image
                     className="w-52 -rotate-6 h-40 filter drop-shadow-2xl fill-neutral-800000"
                     source={logo}
@@ -71,6 +77,7 @@ const Home = () => {
                   <Text className=" text-white text-[20px] font-bold ">
                     CHOOSE YOUR AVATAR
                   </Text>
+                  <UserLogin />
                 </View>
                 <Box
                   my={30}
@@ -149,6 +156,7 @@ const Home = () => {
                 >
                   <Text style={styles.text}>Continue</Text>
                 </Pressable>
+                <SignOut />
 
                 {/* <Pressable
                 className="bg-white mb-10 border-spacing-4 p-3 w-full rounded-2xl"
@@ -163,7 +171,7 @@ const Home = () => {
               </View>
             </View>
           </View>
-        </ImageBackground>
+        </Background>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -191,7 +199,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     height: 900,
-  }
+  },
 });
 
 export default Home;

@@ -1,12 +1,35 @@
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
-import React from "react";
+import React, { useCallback } from "react";
+import * as WebBrowser from "expo-web-browser";
+import { useWarmUpBrowser } from "../hooks/useWarmUpBrowser";
 import { Box, Button, Image, Pressable } from "@gluestack-ui/themed";
 import logo from "../../assets/logo.png";
 import bg from "../../assets/bg-2.jpeg";
+import { useOAuth } from "@clerk/clerk-expo";
+import { err } from "react-native-svg/lib/typescript/xml";
 
-type Props = {};
-
+WebBrowser.maybeCompleteAuthSession();
 const LoginPage = () => {
+  useWarmUpBrowser();
+
+  const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+
+  const onPress = React.useCallback(async () => {
+    try {
+      const { createdSessionId, signIn, signUp, setActive } =
+        await startOAuthFlow();
+
+      if (createdSessionId) {
+        setActive?.({ session: createdSessionId });
+      } else {
+        // Use signIn or signUp for next steps such as MFA
+        signIn;
+      }
+    } catch (err) {
+      console.error("OAuth error", err);
+    }
+  }, []);
+
   return (
     <ImageBackground source={bg} style={styles.background}>
       <View
@@ -44,7 +67,7 @@ const LoginPage = () => {
             alignItems="center"
             width={"$2/3"}
             height={"$10"}
-            onPress={() => console.log("login")}
+            onPress={onPress}
             gap={5}
             borderRadius={"$xl"}
           >
