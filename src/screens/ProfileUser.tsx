@@ -36,10 +36,6 @@ import {
   AvatarImage,
 } from "@gluestack-ui/themed";
 
-import { BlurView } from "@react-native-community/blur";
-
-import LinearGradient from "react-native-linear-gradient";
-
 const StyledView = styled(View);
 
 const ProfileUser = () => {
@@ -69,7 +65,9 @@ const ProfileUser = () => {
                 <Text
                   className="border-2 text-[10px] my-3 text-center border-white  w-full h-5 text-black rounded-2xl  bg-none"
                   // placeholder="make a room"
-                >999</Text>
+                >
+                  999
+                </Text>
                 <Box style={{ position: "absolute", right: 70, bottom: 4 }}>
                   <Ionicons name="diamond" size={30} color="blue" />
                 </Box>
@@ -84,9 +82,7 @@ const ProfileUser = () => {
               blurAmount={10}
               reducedTransparencyFallbackColor="white"
             > */}
-            <Card
-              style={styles.boxProfile}
-            >
+            <Card style={styles.boxProfile}>
               {/* <LinearGradient
                 colors={["rgb(238,174,202)", "rgba(148,187,233,1)"]}
                 style={styles.gradient}
@@ -138,18 +134,18 @@ const ProfileUser = () => {
                 // style={{ backgroundColor: colors.PURPLE }}
               >
               </StyledView> */}
-                <StyledView className="p-4 mx-4">
-                  <Pressable
-                    className="bg-white  border-spacing-4 p-1 w-full rounded-2xl"
-                    style={{ backgroundColor: colors.YELLOW }}
-                  >
-                    <View className="flex flex-row justify-center">
-                      <Text className=" color-red text-[20px] font-bold ">
-                        Start Game
-                      </Text>
-                    </View>
-                  </Pressable>
-                </StyledView>
+              <StyledView className="p-4 mx-4">
+                <Pressable
+                  className="bg-white  border-spacing-4 p-1 w-full rounded-2xl"
+                  style={{ backgroundColor: colors.YELLOW }}
+                >
+                  <View className="flex flex-row justify-center">
+                    <Text className=" color-red text-[20px] font-bold ">
+                      Start Game
+                    </Text>
+                  </View>
+                </Pressable>
+              </StyledView>
               {/* </LinearGradient> */}
             </Card>
             <Box display="flex" flexDirection="row" p={10} top={60} gap={15}>
@@ -261,7 +257,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "",
     // borderTopLeftRadius: 20,
     // borderTopRightRadius: 20,
-    borderRadius:30
+    borderRadius: 30,
   },
   boxQuote: {
     backgroundColor: "",
@@ -288,24 +284,24 @@ const styles = StyleSheet.create({
   },
   card: {
     width: 300,
-    height: 200,  
+    height: 200,
     borderRadius: 10,
     padding: 10,
   },
-CardButton:{
-  borderRadius: 15,
-  backgroundColor: "#e0e0e0",
-  shadowColor: "#b5b5b5",
-  shadowOffset: {
-    width: 7,
-    height: 7,
+  CardButton: {
+    borderRadius: 15,
+    backgroundColor: "#e0e0e0",
+    shadowColor: "#b5b5b5",
+    shadowOffset: {
+      width: 7,
+      height: 7,
+    },
+    shadowRadius: 15,
+    shadowOpacity: 0.35,
+    // box-shadow:  "-7px -7px 13px #b5b5b5",
+    //   border-radius: "15px",
+    // background: "#e0e0e0",
+    // box-shadow:  -7px -7px 13px #b5b5b5,
+    //              7px 7px 13px #ffffff,
   },
-  shadowRadius: 15,
-  shadowOpacity: 0.35,
-  // box-shadow:  "-7px -7px 13px #b5b5b5",
-//   border-radius: "15px",
-// background: "#e0e0e0",
-// box-shadow:  -7px -7px 13px #b5b5b5,
-//              7px 7px 13px #ffffff, 
-}
 });
