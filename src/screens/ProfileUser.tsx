@@ -25,13 +25,6 @@ import {
 import { Box, Card, Image } from "@gluestack-ui/themed";
 import {
   Button,
-  Input,
-  InputSlot,
-  InputField,
-  ButtonText,
-  ButtonIcon,
-  ButtonSpinner,
-  ButtonGroup,
   Avatar,
   AvatarImage,
 } from "@gluestack-ui/themed";
@@ -42,7 +35,7 @@ import LinearGradient from "react-native-linear-gradient";
 
 const StyledView = styled(View);
 
-const ProfileUser = () => {
+const ProfileUser = ({navigation}: any) => {
   return (
     <KeyboardAvoidingView>
       <ScrollView>
@@ -69,7 +62,9 @@ const ProfileUser = () => {
                 <Text
                   className="border-2 text-[10px] my-3 text-center border-white  w-full h-5 text-black rounded-2xl  bg-none"
                   // placeholder="make a room"
-                >999</Text>
+                >
+                  999
+                </Text>
                 <Box style={{ position: "absolute", right: 70, bottom: 4 }}>
                   <Ionicons name="diamond" size={30} color="blue" />
                 </Box>
@@ -84,18 +79,11 @@ const ProfileUser = () => {
               blurAmount={10}
               reducedTransparencyFallbackColor="white"
             > */}
-            <Card
-              style={styles.boxProfile}
-            >
-              {/* <LinearGradient
-                colors={["rgb(238,174,202)", "rgba(148,187,233,1)"]}
-                style={styles.gradient}
-              > */}
+            <Card style={styles.boxProfile}>
               <StyledView className="flex bottom-20 items-center">
                 <Avatar size="xl">
                   <AvatarImage source={ImgLogo1} />
                 </Avatar>
-                {/* <Image source={ImgLogo1} className="w-24 h-24 rounded-full" /> */}
                 <Text className="text-black text-[18px] font-bold">
                   Pani Adi Prinhandoko
                 </Text>
@@ -104,81 +92,55 @@ const ProfileUser = () => {
                 className=" flex flex-col w-auto mx-8 bottom-8 rounded-lg"
                 style={{ backgroundColor: colors.MAROON }}
               >
-                {/* <StyledView className="flex flex-row bg-none">
-              <MaterialIcons name="navigate-next" size={24} color="white" />
-              <MaterialIcons name="navigate-next" size={24} color="white" />
-              <MaterialIcons name="navigate-next" size={24} color="white" />
-              <MaterialIcons name="navigate-next" size={24} color="white" />
-            </StyledView> */}
                 <StyledView className=" flex flex-row justify-between p-4">
-                  <Text className="font-bold  align-justify w-1/2 text-[20px] text-white">
+                  <Text className="font-bold  align-justify w-1/2 text-[15px] text-white">
                     ASAH OTAK ANDA DENGAN QUIZ THINK THANK
                   </Text>
                   <StyledView className="flex   items-center">
                     <Image
                       size="md"
-                      //   borderRadius="$none"
                       source={{
-                        uri: "https://i.ibb.co/nPTTVTt/quiz.png",
+                        uri: "https://i.ibb.co/sbkMdpy/question.png",
                       }}
                     />
-                    {/* <Image source={Imgquiz} className="w-32 h-32 rounded" />
-                <image className=" w-32 h-32 rounded" /> */}
                   </StyledView>
                 </StyledView>
-                {/* <StyledView className="flex flex-row bg-none">
-              <MaterialIcons name="navigate-next" size={24} color="white" />
-              <MaterialIcons name="navigate-next" size={24} color="white" />
-              <MaterialIcons name="navigate-next" size={24} color="white" />
-              <MaterialIcons name="navigate-next" size={24} color="white" />
-            </StyledView> */}
               </StyledView>
-              {/* <StyledView
-                className=" my-4 flex flex-col w-auto mx-8 rounded-lg bg-none"
-                // style={{ backgroundColor: colors.PURPLE }}
-              >
-              </StyledView> */}
-                <StyledView className="p-4 mx-4">
-                  <Pressable
-                    className="bg-white  border-spacing-4 p-1 w-full rounded-2xl"
-                    style={{ backgroundColor: colors.YELLOW }}
-                  >
-                    <View className="flex flex-row justify-center">
-                      <Text className=" color-red text-[20px] font-bold ">
-                        Start Game
-                      </Text>
-                    </View>
-                  </Pressable>
-                </StyledView>
-              {/* </LinearGradient> */}
+              <StyledView className="p-4 mx-4">
+                <Pressable
+                  className="bg-white  border-spacing-4 p-1 w-full rounded-2xl"
+                  style={{ backgroundColor: colors.YELLOW }}
+                >
+                  <View className="flex flex-row justify-center">
+                    <Text className=" color-red text-[20px] font-bold ">
+                      Start Game
+                    </Text>
+                  </View>
+                </Pressable>
+              </StyledView>
             </Card>
             <Box display="flex" flexDirection="row" p={10} top={60} gap={15}>
               <Button
-                // style={styles.CardButton}
-                // size="md"
                 width={70}
                 height={60}
                 borderRadius={12}
                 backgroundColor={colors.DONGKER}
                 $hover-backgroundColor={"$backgroundLight800"}
-                // style={{  backgroundColor: colors.DONGKER }}
                 variant="solid"
                 action="primary"
                 isDisabled={false}
                 isFocusVisible={false}
                 className="p-4 rounded-lg cursor-pointer"
-                //   onPress={() => navigation.navigate("Home")}
+                onPress={() => navigation.navigate("/")}
               >
                 <FontAwesome5 name="user-alt" size={24} color="white" />
               </Button>
               <Button
-                // size="md"
                 width={70}
                 height={60}
                 borderRadius={12}
                 backgroundColor={colors.DONGKER}
                 $hover-backgroundColor={"$backgroundLight800"}
-                // style={{  backgroundColor: colors.DONGKER }}
                 variant="solid"
                 action="primary"
                 isDisabled={false}
@@ -188,13 +150,11 @@ const ProfileUser = () => {
                 <FontAwesome5 name="medal" size={24} color="white" />
               </Button>
               <Button
-                // size="md"
                 width={70}
                 height={60}
                 borderRadius={12}
                 backgroundColor={colors.DONGKER}
                 $hover-backgroundColor={"$backgroundLight800"}
-                // style={{  backgroundColor: colors.DONGKER }}
                 variant="solid"
                 action="primary"
                 isDisabled={false}
@@ -204,18 +164,17 @@ const ProfileUser = () => {
                 <FontAwesome6 name="shop" size={24} color="white" />
               </Button>
               <Button
-                // size="md"
                 width={70}
                 height={60}
                 borderRadius={12}
                 backgroundColor={colors.DONGKER}
                 $hover-backgroundColor={"$backgroundLight800"}
-                // style={{  backgroundColor: colors.DONGKER }}
                 variant="solid"
                 action="primary"
                 isDisabled={false}
                 isFocusVisible={false}
                 className="p-4 rounded-lg cursor-pointer"
+                onPress={() => navigation.navigate("/info")}
               >
                 <MaterialCommunityIcons
                   name="comment-question"
@@ -261,7 +220,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "",
     // borderTopLeftRadius: 20,
     // borderTopRightRadius: 20,
-    borderRadius:30
+    borderRadius: 30,
   },
   boxQuote: {
     backgroundColor: "",
@@ -288,24 +247,24 @@ const styles = StyleSheet.create({
   },
   card: {
     width: 300,
-    height: 200,  
+    height: 200,
     borderRadius: 10,
     padding: 10,
   },
-CardButton:{
-  borderRadius: 15,
-  backgroundColor: "#e0e0e0",
-  shadowColor: "#b5b5b5",
-  shadowOffset: {
-    width: 7,
-    height: 7,
+  CardButton: {
+    borderRadius: 15,
+    backgroundColor: "#e0e0e0",
+    shadowColor: "#b5b5b5",
+    shadowOffset: {
+      width: 7,
+      height: 7,
+    },
+    shadowRadius: 15,
+    shadowOpacity: 0.35,
+    // box-shadow:  "-7px -7px 13px #b5b5b5",
+    //   border-radius: "15px",
+    // background: "#e0e0e0",
+    // box-shadow:  -7px -7px 13px #b5b5b5,
+    //              7px 7px 13px #ffffff,
   },
-  shadowRadius: 15,
-  shadowOpacity: 0.35,
-  // box-shadow:  "-7px -7px 13px #b5b5b5",
-//   border-radius: "15px",
-// background: "#e0e0e0",
-// box-shadow:  -7px -7px 13px #b5b5b5,
-//              7px 7px 13px #ffffff, 
-}
 });

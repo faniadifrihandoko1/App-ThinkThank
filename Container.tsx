@@ -1,13 +1,11 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from "./src/screens/Login";
 import Home from "./src/screens/Home";
 import ProfileUser from "./src/screens/ProfileUser";
-// import Test from "./src/screens/test";
 import Peh from "./src/screens/Peh";
 import LoginPage from "./src/screens/LoginPage";
+import Rules from "./src/screens/Rules";
+import InGame from "./src/screens/InGame";
 
 
 
@@ -21,10 +19,11 @@ const Container = (props: Props) => {
         screenOptions={{ headerShown: false, statusBarHidden: false }}
       >
 
-        {/* <Stack.Screen name="/" component={Home} /> */}
-        <Stack.Screen name="/profile" component={ProfileUser} />
+        {/* <Stack.Screen name="/" component={Home} />
+        <Stack.Screen name="/profile" component={ProfileUser} /> */}
+        <Stack.Screen name="/in-game" component={InGame} />
+        {/* <Stack.Screen name="/info" component={Rules} /> */}
 
-        {/* <Stack.Screen name="/" component={Home} /> */}
       </Stack.Navigator>
     </>
   );

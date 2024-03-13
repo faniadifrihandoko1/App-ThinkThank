@@ -30,7 +30,7 @@ import { styled } from "nativewind";
 import dataAvatar from "../mocks/dataAvatar";
 import { Avatar, AvatarImage, Box, Card } from "@gluestack-ui/themed";
 const StyledPressable = styled(Pressable);
-const Home = () => {
+const Home = ({ navigation }: any) => {
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
   const [name, setName] = React.useState("");
 
@@ -143,7 +143,7 @@ const Home = () => {
                     styles.button,
                     pressed || isHovered ? styles.buttonHovered : null,
                   ]}
-                  onPress={() => console.log("Button Pressed")}
+                  onPress={() => navigation.navigate("/profile")}
                   onPressIn={handleHoverIn}
                   onPressOut={handleHoverOut}
                 >

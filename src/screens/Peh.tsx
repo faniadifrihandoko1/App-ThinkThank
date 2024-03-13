@@ -12,7 +12,7 @@ const BlurredCard = () => {
         blurAmount={10}
         reducedTransparencyFallbackColor="white"
       >
-        <Card style={styles.card}>
+        <Card style={styless.card}>
           {/* Konten card di sini */}
           <Card.Title title="Judul Card" />
           {/* <Card.Content>
@@ -39,11 +39,68 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  // card: {
+  //   width: 300,
+  //   height: 200,
+  //   borderRadius: 10,
+  //   padding: 10,
+  // },
+  // card: {
+  //   width: 190,
+  //   height: 254,
+  //   backgroundColor: 'rgba(217, 217, 217, 0.58)',
+  //   borderWidth: 1,
+  //   borderColor: 'white',
+  //   borderRadius: 17,
+  //   shadowColor: 'black',
+  //   shadowOffset: {
+  //     width: 12,
+  //     height: 17,
+  //   },
+  //   shadowOpacity: 0.22,
+  //   shadowRadius: 51,
+  //   elevation: 5,
+  //   textAlign: 'center',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   cursor: 'pointer',
+  //   transitionDuration: 500,
+  //   fontWeight: 'bold',
+  //   color: 'black',
+  // },
+  // cardText: {
+  //   fontWeight: 'bold',
+  //   color: 'black',
+  // },
+});
+
+const styless = StyleSheet.create({
   card: {
-    width: 300,
-    height: 200,
-    borderRadius: 10,
-    padding: 10,
+    width: 190,
+    height: 254,
+    backgroundColor: 'rgba(217, 217, 217, 0.58)',
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 17,
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 12,
+      height: 17,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 51,
+    elevation: 5,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // cursor: 'pointer',
+    // transitionDuration: 500,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  cardText: {
+    fontWeight: 'bold',
+    color: 'black',
   },
 });
 
