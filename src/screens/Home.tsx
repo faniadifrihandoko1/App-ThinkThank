@@ -153,7 +153,7 @@ const Home = ({ navigation }: any) => {
                     styles.button,
                     pressed || isHovered ? styles.buttonHovered : null,
                   ]}
-                  onPress={() => navigation.navigate("modal-avatar")}
+                  onPress={() => navigation.navigate("profile")}
                   onPressIn={handleHoverIn}
                   onPressOut={handleHoverOut}
                 >

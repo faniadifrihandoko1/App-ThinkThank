@@ -6,6 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Store from "./src/screens/Store";
 import Profile from "./src/screens/Profile";
 import AvatarModal from "./src/modal/AvatarModal";
+import ProfileUser from "./src/screens/ProfileUser";
 
 type Props = {};
 
@@ -17,11 +18,9 @@ const Container = (props: Props) => {
         screenOptions={{ headerShown: false, statusBarHidden: false }}
       >
         <Stack.Screen name="home" component={Home} />
+        <Stack.Screen name="profile" component={ProfileUser} />
         <Stack.Screen name="modal-avatar" component={AvatarModal} />
-        {/* <Stack.Screen name="profile" component={Profile} />
-        <Stack.Screen name="profile" component={Profile} />
-        <Stack.Screen name="store" component={Store} />
-        <Stack.Screen name="in-game" component={InGame} /> */}
+        {/* <Stack.Screen name="store" component={Store} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
