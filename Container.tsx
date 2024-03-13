@@ -15,16 +15,14 @@ type Props = {};
 const Container = (props: Props) => {
   const Stack = createNativeStackNavigator();
   return (
-    <>
+    <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: false, statusBarHidden: false }}
       >
-        <Stack.Screen name="/" component={AuthRoute} />
-        <Stack.Screen name="/profile" component={ProfileUser} />
-
-        {/* <Stack.Screen name="/" component={Home} /> */}
+        <Stack.Screen name="/" component={Home} />
+        <Stack.Screen name="profile" component={ProfileUser} />
       </Stack.Navigator>
-    </>
+    </NavigationContainer>
   );
 };
 

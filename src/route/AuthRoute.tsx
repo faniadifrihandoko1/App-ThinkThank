@@ -6,6 +6,7 @@ import LoginPage from "../screens/LoginPage";
 import * as SecureStore from "expo-secure-store";
 import SignOut from "../components/SignOut";
 import Home from "../screens/Home";
+import Container from "../../Container";
 
 const tokenCache: any = {
   async getToken(key: string) {
@@ -30,7 +31,7 @@ const AuthRoute = () => {
       publishableKey={Constants.expoConfig?.extra?.clerkPublishableKey}
     >
       <SignedIn>
-        <Home />
+        <Container />
       </SignedIn>
       <SignedOut>
         <LoginPage />
