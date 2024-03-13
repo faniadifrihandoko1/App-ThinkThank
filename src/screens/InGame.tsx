@@ -59,7 +59,7 @@ const InGame = () => {
                 00 : 15
               </Text>
             </Box>
-            <Card marginBottom={300} top={200}>
+            <Card marginBottom={200} top={200}>
               <Box>
                 <Text style={styles.texthHeader}>QUESTION 1 OF 15</Text>
                 <Text style={styles.text}>
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     // borderRadius: 10,
     width: "100%",
     height: 40,
-    marginBottom: 20,
+    marginBottom: 40,
     display: "flex",
   },
   buttonHovered: {
