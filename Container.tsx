@@ -19,10 +19,10 @@ const Container = (props: Props) => {
         screenOptions={{ headerShown: false, statusBarHidden: false }}
       >
 
-        {/* <Stack.Screen name="/" component={Home} />
-        <Stack.Screen name="/profile" component={ProfileUser} /> */}
-        <Stack.Screen name="/in-game" component={InGame} />
-        {/* <Stack.Screen name="/info" component={Rules} /> */}
+        <Stack.Screen name="/" component={Home} />
+        <Stack.Screen name="/profile" component={ProfileUser} />
+        {/* <Stack.Screen name="/in-game" component={InGame} />
+        <Stack.Screen name="/info" component={Rules} /> */}
 
       </Stack.Navigator>
     </>
