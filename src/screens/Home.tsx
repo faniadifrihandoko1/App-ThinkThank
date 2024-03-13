@@ -29,10 +29,16 @@ import { Feather } from "@expo/vector-icons";
 import { styled } from "nativewind";
 import dataAvatar from "../mocks/dataAvatar";
 import { Avatar, AvatarImage, Box, Card } from "@gluestack-ui/themed";
+import Background from "../components/Background";
+import SignOut from "../components/SignOut";
+import { useUser } from "@clerk/clerk-expo";
+import UserLogin from "../components/UserLogin";
 const StyledPressable = styled(Pressable);
+
 const Home = ({ navigation }: any) => {
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
   const [name, setName] = React.useState("");
+  const { user } = useUser();
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -49,7 +55,6 @@ const Home = ({ navigation }: any) => {
       avatarId: selectedAvatar,
       name: name,
     };
-    // console.log(postProfile)
   };
 
   const postProfile = async (e: React.FormEvent<HTMLInputElement>) => {};
@@ -59,18 +64,34 @@ const Home = ({ navigation }: any) => {
   return (
     <KeyboardAvoidingView>
       <ScrollView>
-        <ImageBackground source={bg} style={styles.layar} >
-          <View className="flex-1 justify-center ">
-            <View className="items-center">
-              <View className="w-3/4 items-center">
-                <View className="mt-20 items-center" >
+        <Background>
+          <View
+            // className="flex-1 justify-center "
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
+            <Box style={{ alignItems: "center" }}>
+              <View
+                // className="w-3/4 items-center"
+                style={{ width: 350, alignItems: "center" }}
+              >
+                <View style={{ alignItems: "center", marginTop: 50 }}>
                   <Image
-                    className="w-52 -rotate-6 h-40 filter drop-shadow-2xl fill-neutral-800000"
+                    // className="w-52 -rotate-6 h-40 filter drop-shadow-2xl fill-neutral-800000"
+                    style={{ width: 260, height: 200 }}
                     source={logo}
                   />
-                  <Text className=" text-white text-[20px] font-bold ">
+                  <Text
+                    // className=" text-white text-[20px] font-bold "
+                    style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
+                  >
                     CHOOSE YOUR AVATAR
                   </Text>
+                  <UserLogin />
                 </View>
                 <Box
                   my={30}
@@ -78,22 +99,20 @@ const Home = ({ navigation }: any) => {
                   display="flex"
                   flexDirection="row"
                   flexWrap="wrap"
-                  gap={9}
-                  p={2}
+                  gap={8}
+                  p={1}
                   maxWidth={"100%"}
                   justifyContent="center"
                 >
                   {dataAvatar.map((data) => (
                     <StyledPressable
                       className={`
-                  active:scale-110
-                hover:bg-slate-950
-                
-              `}
+                    active:scale-110
+                  hover:bg-slate-950`}
                       key={data.id}
                       onPress={() => handleAvatar(data.id)}
                     >
-                      <Avatar w={80} h={80}>
+                      <Avatar w={70} h={70}>
                         <AvatarImage
                           source={{
                             uri: data.image,
@@ -121,8 +140,6 @@ const Home = ({ navigation }: any) => {
 
                 <Input borderRadius={10} borderColor="white" marginBottom={30}>
                   <InputSlot pl="$3">
-                    {/* <InputIcon as={EditIcon} /> */}
-                    {/* <Icon as={EditIcon} m="$2" w="$4" h="$4" /> */}
                     <Feather name="edit" size={24} color="white" />
                   </InputSlot>
                   <InputField
@@ -131,39 +148,22 @@ const Home = ({ navigation }: any) => {
                     placeholder="Enter your name"
                   />
                 </Input>
-
-                {/* <TextInput
-                className="border-2 my-4 border-white text-white rounded-2xl p-2 w-full mt-8 "
-                placeholder="Enter your name"
-                onChange={(e: any) => setName(e.target.value)}
-              /> */}
                 <Pressable
-                  // className="bg-white mb-10 border-spacing-4 p-3 w-full rounded-2xl"
                   style={({ pressed }) => [
                     styles.button,
                     pressed || isHovered ? styles.buttonHovered : null,
                   ]}
-                  onPress={() => navigation.navigate("/profile")}
+                  onPress={() => navigation.navigate("modal-avatar")}
                   onPressIn={handleHoverIn}
                   onPressOut={handleHoverOut}
                 >
                   <Text style={styles.text}>Continue</Text>
                 </Pressable>
-
-                {/* <Pressable
-                className="bg-white mb-10 border-spacing-4 p-3 w-full rounded-2xl"
-                onPress={handleSubmit}
-              >
-                <View className="flex flex-row justify-center">
-                  <Text className=" color-red text-[20px] font-bold ">
-                    Continue
-                  </Text>
-                </View>
-              </Pressable> */}
+                <SignOut />
               </View>
-            </View>
+            </Box>
           </View>
-        </ImageBackground>
+        </Background>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -175,7 +175,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     width: "100%",
-    marginBottom: 20,
   },
   buttonHovered: {
     backgroundColor: "gray",
@@ -191,7 +190,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     height: 900,
-  }
+  },
 });
 
 export default Home;

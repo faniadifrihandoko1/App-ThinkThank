@@ -11,15 +11,45 @@ import { config } from "@gluestack-ui/config";
 import Index from "./src/components/Index";
 import Login from "./src/screens/Login";
 import Container from "./Container";
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
+import Constants from "expo-constants";
+import * as SecureStore from "expo-secure-store";
+import SignOut from "./src/components/SignOut";
+import LoginPage from "./src/screens/LoginPage";
+
+const tokenCache:any = {
+ async getToken(key: string) {
+    try {
+      return SecureStore.getItemAsync(key);
+    } catch (err) {
+      return null;
+    }
+  },
+  async saveToken(key: string, value: string) {
+    try {
+      return SecureStore.setItemAsync(key, value);
+    } catch (err) {
+      return null;
+    }
+  },
+};
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
-    <GluestackUIProvider config={config}>
-      <NavigationContainer>
-        <Container />
-      </NavigationContainer>
-    </GluestackUIProvider>
+    <ClerkProvider
+      tokenCache={tokenCache}
+      publishableKey={Constants.expoConfig?.extra?.clerkPublishableKey}
+    >
+      <GluestackUIProvider config={config}>
+        <SignedIn>
+          <Container />
+        </SignedIn>
+        <SignedOut>
+          <LoginPage />
+        </SignedOut>
+      </GluestackUIProvider>
+    </ClerkProvider>
   );
 }
 
