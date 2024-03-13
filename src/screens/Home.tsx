@@ -35,7 +35,7 @@ import { useUser } from "@clerk/clerk-expo";
 import UserLogin from "../components/UserLogin";
 const StyledPressable = styled(Pressable);
 
-const Home = () => {
+const Home = ({ navigation }: any) => {
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
   const [name, setName] = React.useState("");
   const { user } = useUser();
@@ -150,7 +150,7 @@ const Home = () => {
                     styles.button,
                     pressed || isHovered ? styles.buttonHovered : null,
                   ]}
-                  onPress={() => console.log("Button Pressed")}
+                  onPress={() => navigation.navigate("profile")}
                   onPressIn={handleHoverIn}
                   onPressOut={handleHoverOut}
                 >
