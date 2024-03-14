@@ -65,6 +65,7 @@ const Home = ({ navigation }: any) => {
     <KeyboardAvoidingView>
       <ScrollView>
         <Background>
+
           <View
             // className="flex-1 justify-center "
             style={{
@@ -160,6 +161,19 @@ const Home = ({ navigation }: any) => {
                   <Text style={styles.text}>Continue</Text>
                 </Pressable>
                 <SignOut />
+
+
+
+                {/* <Pressable
+                className="bg-white mb-10 border-spacing-4 p-3 w-full rounded-2xl"
+                onPress={handleSubmit}
+              >
+                <View className="flex flex-row justify-center">
+                  <Text className=" color-red text-[20px] font-bold ">
+                    Continue
+                  </Text>
+                </View>
+              </Pressable> */}
               </View>
             </Box>
           </View>

@@ -27,7 +27,9 @@ const LoginPage = () => {
       }
     } catch (err) {
       console.error("OAuth error", err);
+
     } 
+
   }, []);
 
   return (

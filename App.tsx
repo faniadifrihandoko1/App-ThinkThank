@@ -14,11 +14,17 @@ import Container from "./Container";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 import Constants from "expo-constants";
 import * as SecureStore from "expo-secure-store";
+
 import SignOut from "./src/components/SignOut";
 import LoginPage from "./src/screens/LoginPage";
 
-const tokenCache:any = {
- async getToken(key: string) {
+
+import Home from "./src/screens/Home";
+import LoginPage from "./src/screens/LoginPage";
+
+const tokenCache: any = {
+  async getToken(key: string) {
+
     try {
       return SecureStore.getItemAsync(key);
     } catch (err) {

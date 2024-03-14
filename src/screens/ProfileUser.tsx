@@ -4,6 +4,7 @@ import ImgLogo1 from "../../assets/bapaksripal.png";
 import diamond from "../../assets/diamond.png";
 import cube from "../../assets/cube.png";
 
+
 import { StyleSheet } from "react-native";
 import {
   Box,
@@ -37,6 +38,26 @@ const StyledPressable = styled(Pressable);
 
 // const StyledView = styled(View);
 
+// import { Entypo } from "@expo/vector-icons";
+// import { Ionicons } from "@expo/vector-icons";
+// import { FontAwesome6 } from "@expo/vector-icons";
+// import { FontAwesome5 } from "@expo/vector-icons";
+// import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+// import { StyleSheet } from "react-native";
+// import {
+//   AvatarFallbackText,
+//   Box,
+//   ButtonText,
+//   Card,
+//   Image,
+//   Pressable,
+//   View,
+// } from "@gluestack-ui/themed";
+// import { Button, Avatar, AvatarImage } from "@gluestack-ui/themed";
+// import Background from "../components/Background";
+// import { Text } from "@gluestack-ui/themed";
+
 const ProfileUser = ({ navigation }: any) => {
   // #########
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
@@ -44,12 +65,13 @@ const ProfileUser = ({ navigation }: any) => {
     setSelectedAvatar(avatarId);
   };
   // #########
-
+    
   // Modal
   const [showModal, setShowModal] = React.useState(false);
   console.log(showModal);
   const ref = React.useRef(null);
   // Modal
+
   return (
     <Background>
       <View height="100%" display="flex" flexDirection="column">
@@ -144,8 +166,10 @@ const ProfileUser = ({ navigation }: any) => {
             <Button
               bg="#F8BD00"
               rounded={"$lg"}
+
               onPress={() => setShowModal(true)}
               ref={ref}
+
             >
               <Text color="$white" fontWeight={"bold"} fontSize={18}>
                 mulai quiz
@@ -153,6 +177,7 @@ const ProfileUser = ({ navigation }: any) => {
             </Button>
           </Box>
         </Box>
+
         {/* #############MODAL############## make gini dlu besok gua bikin yang manggil nya misah  */}
         <Center h={300}>
           <Modal
@@ -262,6 +287,7 @@ const ProfileUser = ({ navigation }: any) => {
             </ModalContent>
           </Modal>
         </Center>
+
 
         {/* <View display="flex" flexDirection="column" height="100%" bg="$red">
           <Box
