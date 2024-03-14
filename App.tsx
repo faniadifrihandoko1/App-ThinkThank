@@ -9,7 +9,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config";
 import Index from "./src/components/Index";
-import Login from "./src/screens/Login";
 import Container from "./Container";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 import Constants from "expo-constants";
@@ -18,13 +17,10 @@ import * as SecureStore from "expo-secure-store";
 import SignOut from "./src/components/SignOut";
 import LoginPage from "./src/screens/LoginPage";
 
-
 import Home from "./src/screens/Home";
-import LoginPage from "./src/screens/LoginPage";
 
 const tokenCache: any = {
   async getToken(key: string) {
-
     try {
       return SecureStore.getItemAsync(key);
     } catch (err) {
