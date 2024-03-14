@@ -27,7 +27,9 @@ const LoginPage = () => {
       }
     } catch (err) {
       console.error("OAuth error", err);
-    }
+
+    } 
+
   }, []);
 
   return (
@@ -39,7 +41,7 @@ const LoginPage = () => {
           alignItems: "center",
 
           height: "100%",
-        }}
+        }} 
       >
         <Box
           justifyContent="center"

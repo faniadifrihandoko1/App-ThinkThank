@@ -1,35 +1,77 @@
 import React from "react";
-import { styled } from "nativewind";
-import colors from "../utils/color";
 
-import bg from "../../assets/bg-2.jpeg";
 import ImgLogo1 from "../../assets/bapaksripal.png";
 import diamond from "../../assets/diamond.png";
 import cube from "../../assets/cube.png";
 
-import { Entypo } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { FontAwesome6 } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { StyleSheet } from "react-native";
 import {
-  AvatarFallbackText,
   Box,
-  ButtonText,
+  Avatar,
+  AvatarImage,
   Card,
-  Image,
   Pressable,
   View,
+  Text,
+  Button,
+  ButtonText,
+  Center,
+  Modal,
+  ModalBackdrop,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Image,
 } from "@gluestack-ui/themed";
-import { Button, Avatar, AvatarImage } from "@gluestack-ui/themed";
 import Background from "../components/Background";
-import { Text } from "@gluestack-ui/themed";
+import dataAvatarModal from "../mocks/dataAvatarModal";
 
-const StyledView = styled(View);
+import { FontAwesome } from "@expo/vector-icons";
+
+import D from "../../assets/diamond-2.png";
+
+import { styled } from "nativewind";
+import colors from "../utils/color";
+const StyledPressable = styled(Pressable);
+
+// const StyledView = styled(View);
+
+// import { Entypo } from "@expo/vector-icons";
+// import { Ionicons } from "@expo/vector-icons";
+// import { FontAwesome6 } from "@expo/vector-icons";
+// import { FontAwesome5 } from "@expo/vector-icons";
+// import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+// import { StyleSheet } from "react-native";
+// import {
+//   AvatarFallbackText,
+//   Box,
+//   ButtonText,
+//   Card,
+//   Image,
+//   Pressable,
+//   View,
+// } from "@gluestack-ui/themed";
+// import { Button, Avatar, AvatarImage } from "@gluestack-ui/themed";
+// import Background from "../components/Background";
+// import { Text } from "@gluestack-ui/themed";
 
 const ProfileUser = ({ navigation }: any) => {
+  // #########
+  const [selectedAvatar, setSelectedAvatar] = React.useState(0);
+  const handleAvatar = (avatarId: number) => {
+    setSelectedAvatar(avatarId);
+  };
+  // #########
+    
+  // Modal
+  const [showModal, setShowModal] = React.useState(false);
+  console.log(showModal);
+  const ref = React.useRef(null);
+  // Modal
+
   return (
     <Background>
       <View height="100%" display="flex" flexDirection="column">
@@ -124,7 +166,10 @@ const ProfileUser = ({ navigation }: any) => {
             <Button
               bg="#F8BD00"
               rounded={"$lg"}
-              onPress={() => alert("kamu bangsat")}
+
+              onPress={() => setShowModal(true)}
+              ref={ref}
+
             >
               <Text color="$white" fontWeight={"bold"} fontSize={18}>
                 mulai quiz
@@ -132,6 +177,118 @@ const ProfileUser = ({ navigation }: any) => {
             </Button>
           </Box>
         </Box>
+
+        {/* #############MODAL############## make gini dlu besok gua bikin yang manggil nya misah  */}
+        <Center h={300}>
+          <Modal
+            isOpen={showModal}
+            onClose={() => {
+              setShowModal(false);
+            }}
+            finalFocusRef={ref}
+          >
+            <ModalBackdrop />
+            <ModalContent>
+              <ModalHeader display="flex" justifyContent="center" bottom={"$4"}>
+                <Pressable
+                  bg="#F8BD00"
+                  w={"$32"}
+                  alignItems="center"
+                  justifyContent="center"
+                  h={"$10"}
+                  borderRadius="$xl"
+                  position="relative"
+                >
+                  <Text>Avatar</Text>
+                </Pressable>
+              </ModalHeader>
+              <ModalBody w={"$full"} h={"$56"} p={"$4"} display="flex">
+                <Box
+                  display="flex"
+                  flexWrap="wrap"
+                  flexDirection="row"
+                  gap={"$2"}
+                >
+                  {dataAvatarModal.map((data) => (
+                    <StyledPressable
+                      className={`
+              active:scale-110
+            hover:bg-slate-950`}
+                      key={data.id}
+                      onPress={() => handleAvatar(data.id)}
+                    >
+                      <Card w={"$20"} rounded={"$xl"} key={data.id}>
+                        <Image
+                          w={"$12"}
+                          h={"$12"}
+                          rounded={"$full"}
+                          source={{
+                            uri: data.image,
+                          }}
+                        />
+                        {selectedAvatar === data.id && (
+                          <Box
+                            style={{
+                              position: "absolute",
+                              right: 0,
+                              bottom: 0,
+                            }}
+                          >
+                            <FontAwesome
+                              name="check-circle"
+                              size={30}
+                              color="white"
+                            />
+                          </Box>
+                        )}
+                        <View
+                          display="flex"
+                          alignItems="center"
+                          p={"$2"}
+                          flexDirection="row"
+                        >
+                          <Text>{data.price}</Text>
+                          <Image w={"$4"} h={"$4"} source={D} />
+                        </View>
+                      </Card>
+                    </StyledPressable>
+                  ))}
+                </Box>
+              </ModalBody>
+              <ModalFooter
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Button
+                  variant="outline"
+                  size="sm"
+                  action="secondary"
+                  mr="$3"
+                  onPress={() => {
+                    setShowModal(false);
+                  }}
+                >
+                  <ButtonText>Cancel</ButtonText>
+                </Button>
+                <Button
+                  size="sm"
+                  style={{
+                    backgroundColor: colors.YELLOW
+                  }}
+                  borderWidth="$0"
+                  onPress={() => {
+                    setShowModal(false);
+                  }}
+                >
+                  <ButtonText>Apply</ButtonText>
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </Center>
+
+
         {/* <View display="flex" flexDirection="column" height="100%" bg="$red">
           <Box
             width="100%"
