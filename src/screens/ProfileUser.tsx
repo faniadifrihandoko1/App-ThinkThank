@@ -30,6 +30,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import D from "../../assets/diamond-2.png";
 import { styled } from "nativewind";
 import colors from "../utils/color";
+import AvatarModal from "../modal/AvatarModal";
+import Diamond from "../modal/Diamond";
 const StyledPressable = styled(Pressable);
 
 const ProfileUser = ({ navigation }: any) => {
@@ -39,13 +41,6 @@ const ProfileUser = ({ navigation }: any) => {
     setSelectedAvatar(avatarId);
   };
   // #########
-
-  // Modal
-  const [showModal, setShowModal] = React.useState(false);
-  console.log(showModal);
-  const ref = React.useRef(null);
-  // Modal
-
   return (
     <Background>
       <View height="100%" display="flex" flexDirection="column">
@@ -56,9 +51,9 @@ const ProfileUser = ({ navigation }: any) => {
           flexDirection="row"
           justifyContent="flex-end"
           alignItems="center"
-          mt={40}
+          mt={-80}
         >
-          <Box display="flex" flexDirection="row" alignItems="center">
+          <Box display="flex" bg="black" flexDirection="row" alignItems="center">
             <Image
               source={diamond}
               position="relative"
@@ -82,23 +77,7 @@ const ProfileUser = ({ navigation }: any) => {
                 50
               </ButtonText>
             </Box>
-
-            <Pressable
-              px={10}
-              bg="#0ACF83"
-              borderWidth={1}
-              borderColor={"#018b56"}
-              borderRadius={"$md"}
-            >
-              <ButtonText
-                shadowRadius={2}
-                color="$white"
-                fontWeight={"semibold"}
-                size="md"
-              >
-                +
-              </ButtonText>
-            </Pressable>
+            <Diamond/>
           </Box>
         </Box>
         <Box
@@ -106,7 +85,8 @@ const ProfileUser = ({ navigation }: any) => {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          mt={80}
+          mt={-60}
+          bg="red"
         >
           <Button
             bg={"$white"}
@@ -119,7 +99,6 @@ const ProfileUser = ({ navigation }: any) => {
             w={95}
             position="relative"
 
-            // onPress={() => navigation.navigate("Home")}
           >
             <Avatar shadowRadius={2} bg="$transparent">
               <AvatarImage
@@ -130,7 +109,6 @@ const ProfileUser = ({ navigation }: any) => {
               />
             </Avatar>
             <Pressable
-              borderRadius={"$full"}
               position="absolute"
               bg="#B5C0D0"
               borderStyle="solid"
@@ -142,9 +120,9 @@ const ProfileUser = ({ navigation }: any) => {
               right={0}
               display="flex"
               justifyContent="center"
-              alignItems="center"
-            >
-              <FontAwesome name="pencil" size={20} color="black" />
+              alignItems="center"              
+              >
+              <AvatarModal/>
             </Pressable>
           </Button>
           <Text fontWeight={"bold"} color="$black" mt={5}>
@@ -167,8 +145,6 @@ const ProfileUser = ({ navigation }: any) => {
             </Button>
           </Box>
         </Box>
-
-        {/* #############MODAL############## make gini dlu besok gua bikin yang manggil nya misah  */}
       </View>
     </Background>
   );
