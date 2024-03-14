@@ -1,10 +1,10 @@
-export interface Data {
+export interface IAvatar {
     id: number
     image: string
     price?: number |string
 }[]
 
-const dataAvatarModal: Data[] = [
+const dataAvatarModal: IAvatar[] = [
     {
         id: 1,
         image:"https://i.ibb.co/gwx2khL/bapakpani.png",
@@ -47,6 +47,25 @@ const dataAvatarModal: Data[] = [
     },
     {
         id: 9,
+        image: "https://i.ibb.co/0VRQr4F/free1.png",
+        price: 3,
+    },{
+        id: 10,
+        image: "https://i.ibb.co/0VRQr4F/free1.png",
+        price: 3,
+    },
+    {
+        id: 11,
+        image: "https://i.ibb.co/0VRQr4F/free1.png",
+        price: 3,
+    },
+    {
+        id: 12,
+        image: "https://i.ibb.co/0VRQr4F/free1.png",
+        price: 3,
+    },
+    {
+        id: 13,
         image: "https://i.ibb.co/0VRQr4F/free1.png",
         price: 3,
     }

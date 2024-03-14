@@ -3,15 +3,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/screens/Home";
 import InGame from "./src/screens/InGame";
 import { NavigationContainer } from "@react-navigation/native";
-import Store from "./src/screens/Store";
-import Profile from "./src/screens/Profile";
 import AvatarModal from "./src/modal/AvatarModal";
 import ProfileUser from "./src/screens/ProfileUser";
 
-// import Test from "./src/screens/test";
-
-import LoginPage from "./src/screens/LoginPage";
-import AuthRoute from "./src/route/AuthRoute";
 
 type Props = {};
 

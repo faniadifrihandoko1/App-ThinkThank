@@ -15,13 +15,9 @@ import {
   Input,
   InputSlot,
   InputField,
-  InputIcon,
-  EditIcon,
-  Icon,
 } from "@gluestack-ui/themed";
 
 import logo from "../../assets/logo.png";
-import bg from "../../assets/bg-2.jpeg";
 
 import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -39,6 +35,8 @@ const Home = ({ navigation }: any) => {
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
   const [name, setName] = React.useState("");
   const { user } = useUser();
+
+ 
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -61,13 +59,14 @@ const Home = ({ navigation }: any) => {
   const handleAvatar = (avatarId: number) => {
     setSelectedAvatar(avatarId);
   };
+
+  
   return (
     <KeyboardAvoidingView>
       <ScrollView>
         <Background>
 
           <View
-            // className="flex-1 justify-center "
             style={{
               flex: 1,
               justifyContent: "center",
@@ -77,17 +76,14 @@ const Home = ({ navigation }: any) => {
           >
             <Box style={{ alignItems: "center" }}>
               <View
-                // className="w-3/4 items-center"
                 style={{ width: 350, alignItems: "center" }}
               >
                 <View style={{ alignItems: "center", marginTop: 50 }}>
                   <Image
-                    // className="w-52 -rotate-6 h-40 filter drop-shadow-2xl fill-neutral-800000"
                     style={{ width: 260, height: 200 }}
                     source={logo}
                   />
                   <Text
-                    // className=" text-white text-[20px] font-bold "
                     style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
                   >
                     CHOOSE YOUR AVATAR
@@ -126,6 +122,7 @@ const Home = ({ navigation }: any) => {
                               right: 0,
                               bottom: 0,
                             }}
+                            
                           >
                             <FontAwesome
                               name="check-circle"
@@ -161,19 +158,6 @@ const Home = ({ navigation }: any) => {
                   <Text style={styles.text}>Continue</Text>
                 </Pressable>
                 <SignOut />
-
-
-
-                {/* <Pressable
-                className="bg-white mb-10 border-spacing-4 p-3 w-full rounded-2xl"
-                onPress={handleSubmit}
-              >
-                <View className="flex flex-row justify-center">
-                  <Text className=" color-red text-[20px] font-bold ">
-                    Continue
-                  </Text>
-                </View>
-              </Pressable> */}
               </View>
             </Box>
           </View>
