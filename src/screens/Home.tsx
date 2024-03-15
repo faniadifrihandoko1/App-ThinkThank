@@ -11,11 +11,7 @@ import {
   ImageBackground,
 } from "react-native";
 
-import {
-  Input,
-  InputSlot,
-  InputField,
-} from "@gluestack-ui/themed";
+import { Input, InputSlot, InputField } from "@gluestack-ui/themed";
 
 import logo from "../../assets/logo.png";
 
@@ -35,8 +31,6 @@ const Home = ({ navigation }: any) => {
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
   const [name, setName] = React.useState("");
   const { user } = useUser();
-
- 
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -60,12 +54,10 @@ const Home = ({ navigation }: any) => {
     setSelectedAvatar(avatarId);
   };
 
-  
   return (
     <KeyboardAvoidingView>
       <ScrollView>
         <Background>
-
           <View
             style={{
               flex: 1,
@@ -75,14 +67,9 @@ const Home = ({ navigation }: any) => {
             }}
           >
             <Box style={{ alignItems: "center" }}>
-              <View
-                style={{ width: 350, alignItems: "center" }}
-              >
-                <View style={{ alignItems: "center", marginTop: 50 }}>
-                  <Image
-                    style={{ width: 260, height: 200 }}
-                    source={logo}
-                  />
+              <View style={{ width: 350, alignItems: "center" }}>
+                <View style={{ alignItems: "center", marginTop: 60 }}>
+                  <Image style={{ width: 260, height: 200 }} source={logo} />
                   <Text
                     style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
                   >
@@ -122,7 +109,6 @@ const Home = ({ navigation }: any) => {
                               right: 0,
                               bottom: 0,
                             }}
-                            
                           >
                             <FontAwesome
                               name="check-circle"

@@ -53,7 +53,7 @@ const ProfileUser = ({ navigation }: any) => {
           alignItems="center"
           mt={-80}
         >
-          <Box display="flex" bg="black" flexDirection="row" alignItems="center">
+          <Box display="flex"  flexDirection="row" alignItems="center">
             <Image
               source={diamond}
               position="relative"
@@ -86,7 +86,6 @@ const ProfileUser = ({ navigation }: any) => {
           justifyContent="center"
           alignItems="center"
           mt={-60}
-          bg="red"
         >
           <Button
             bg={"$white"}
@@ -137,7 +136,7 @@ const ProfileUser = ({ navigation }: any) => {
             <Button
               bg="#F8BD00"
               rounded={"$lg"}
-              onPress={() => navigation.navigate("in-game")}
+              onPress={() => navigation.navigate("room")}
             >
               <Text color="$white" fontWeight={"bold"} fontSize={18}>
                 mulai quiz

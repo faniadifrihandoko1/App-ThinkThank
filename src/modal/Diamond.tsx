@@ -28,7 +28,7 @@ import { styled } from "nativewind";
 import { Image } from "@gluestack-ui/themed";
 const StyledPressable = styled(Pressable);
 
-const Diamond = () => {
+const Diamond = ({ navigation }: any) => {
   const [selectedDiamond, setSelectedDiamond] = React.useState(0);
 
   const handleDiamond = (diamondId: number) => {
@@ -47,8 +47,8 @@ const Diamond = () => {
               m-2`}
       onPress={() => handleDiamond(item.id)}
     >
-      <Card w={"$24"} rounded={"$xl"} key={item.id}>
-        <Text fontWeight="bold">{item.diamond}</Text>
+      <Card w={"$24"} rounded={"$xl"} alignItems="center" key={item.id}>
+        <Text color="$green" fontWeight="bold">{item.diamond}</Text>
         <Image
           w={"$12"}
           h={"$12"}
@@ -67,8 +67,8 @@ const Diamond = () => {
             <FontAwesome name="check-circle" size={30} color="white" />
           </Box>
         )}
-        <View display="flex" alignItems="center" p={"$2"} flexDirection="row">
-          <Text>Rp.{item.price}</Text>
+        <View  >
+          <Text color="$red" fontSize={ms(8)}>Rp.{item.price}</Text>
         </View>
       </Card>
     </StyledPressable>
