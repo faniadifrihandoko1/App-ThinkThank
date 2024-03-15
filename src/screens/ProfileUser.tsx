@@ -53,7 +53,9 @@ const ProfileUser = ({ navigation }: any) => {
           alignItems="center"
           mt={-80}
         >
+
           <Box display="flex"  flexDirection="row" alignItems="center">
+
             <Image
               source={diamond}
               position="relative"
@@ -77,7 +79,7 @@ const ProfileUser = ({ navigation }: any) => {
                 50
               </ButtonText>
             </Box>
-            <Diamond/>
+            <Diamond />
           </Box>
         </Box>
         <Box
@@ -97,7 +99,6 @@ const ProfileUser = ({ navigation }: any) => {
             h={95}
             w={95}
             position="relative"
-
           >
             <Avatar shadowRadius={2} bg="$transparent">
               <AvatarImage
@@ -119,9 +120,9 @@ const ProfileUser = ({ navigation }: any) => {
               right={0}
               display="flex"
               justifyContent="center"
-              alignItems="center"              
-              >
-              <AvatarModal/>
+              alignItems="center"
+            >
+              <AvatarModal />
             </Pressable>
           </Button>
           <Text fontWeight={"bold"} color="$black" mt={5}>
@@ -136,7 +137,9 @@ const ProfileUser = ({ navigation }: any) => {
             <Button
               bg="#F8BD00"
               rounded={"$lg"}
+
               onPress={() => navigation.navigate("room")}
+
             >
               <Text color="$white" fontWeight={"bold"} fontSize={18}>
                 mulai quiz
