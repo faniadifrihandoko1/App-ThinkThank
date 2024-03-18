@@ -9,33 +9,61 @@ import {
   Pressable,
 } from "@gluestack-ui/themed";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Background from "../components/Background";
 import { Feather } from "@expo/vector-icons";
 import { FlatList, ListRenderItem } from "react-native";
 import dataPlayer, { IPLayer } from "../mocks/dataPlayer";
 import { moderateScale as ms } from "react-native-size-matters";
+
 import { useNavigation } from "@react-navigation/native";
+
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+
 
 const Room = ({ navigation }: any) => {
   const [jumlahPlayer, setJumlahPlayer] = React.useState(0);
   // contdown
-  const navigations = useNavigation();
-  const [countdown, setCountdown] = React.useState<number>(30);
+  const [countdown, setCountdown] = React.useState<number>(10);
+  const [isRunning, setIsRunning] = useState<boolean>(true);
+  const initialCountdown = 10;
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCountdown((prevCountdown) => prevCountdown - 1);
-    }, 1000);
+
+    let interval: NodeJS.Timeout;
+
+    if (isRunning) {
+      interval = setInterval(() => {
+        setCountdown(prevCountdown => {
+          if (prevCountdown === 1) {
+            clearInterval(interval);
+            setIsRunning(false);
+            navigation.navigate('quiz');
+            return initialCountdown;
+          } else {   
+            return prevCountdown - 1;
+          }
+        });
+      }, 1000);
+    }
+
 
     return () => clearInterval(interval);
-  }, []);
+  }, [initialCountdown, isRunning]);
 
   useEffect(() => {
-    if (countdown === 0) {
-      // Redirect ke halaman selanjutnya setelah countdown selesai
-      navigation.navigate("quiz");
-    }
-  }, [countdown, navigation]);
+
+    // Start countdown when component is mounted
+    setIsRunning(true);
+
+    // Ensure countdown restarts when component is navigated back to
+    const unsubscribe = navigation.addListener('focus', () => {
+      setCountdown(initialCountdown);
+      setIsRunning(true);
+    });
+
+    return unsubscribe;
+  }, [initialCountdown]);
+
 
   // contdown
 
