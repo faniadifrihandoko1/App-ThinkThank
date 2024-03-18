@@ -1,4 +1,4 @@
-import { Animated,  StyleSheet } from "react-native";
+import { Animated, StyleSheet } from "react-native";
 import {
   Avatar,
   AvatarImage,
@@ -20,9 +20,9 @@ const Room = ({ navigation }: any) => {
   const [jumlahPlayer, setJumlahPlayer] = React.useState(0);
 
   useEffect(() => {
-    const batasPlayer = dataPlayer.filter((_, index) => index <5)
+    const batasPlayer = dataPlayer.filter((_, index) => index < 5);
     setJumlahPlayer(batasPlayer.length);
-  },[])
+  }, []);
   const Player = ({ item }: { item: IPLayer }) => (
     <Box
       p={"$4"}
@@ -68,7 +68,7 @@ const Room = ({ navigation }: any) => {
         // px={30}
       >
         <Pressable
-          h='20%'
+          h="20%"
           display="flex"
           flexDirection={"row"}
           justifyContent={"flex-end"}
@@ -92,12 +92,12 @@ const Room = ({ navigation }: any) => {
             </Text>
             <Text fontSize={"$3xl"}> / 5</Text>
           </Box>
-          <Box mt={ms(20)} >
+          <Box mt={ms(20)}>
             <FlatList
               data={dataPlayer}
               renderItem={RenderItem}
               keyExtractor={(_, index) => index.toString()}
-              contentContainerStyle={{gap: 10}}
+              contentContainerStyle={{ gap: 10 }}
               // style={{ marginTop: }}
             />
           </Box>
