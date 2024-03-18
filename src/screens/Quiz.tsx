@@ -7,7 +7,7 @@ import * as Progress from "react-native-progress";
 import IQuestion, { questions as dataQuiz } from "../mocks/dataQuiz";
 import { TouchableWithoutFeedback } from "react-native";
 
-const Quiz = () => {
+const Quiz = ({ navigation }: { navigation: any }) => {
   const [question, setQuestion] = React.useState<IQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
   const [selecetAnswer, setSelectAnswer] = React.useState<number | null>(null);
@@ -40,7 +40,7 @@ const Quiz = () => {
   };
 
   const resetTimer = () => {
-    setTimeRemaining(18);
+    setTimeRemaining(1);
   };
 
   const currentQuestion = question[currentQuestionIndex];
@@ -50,6 +50,9 @@ const Quiz = () => {
       setCurrentQuestionIndex((prev) => prev + 1);
       resetTimer();
       setSelectAnswer(null);
+    } else if (currentQuestionIndex === 19) {
+      navigation.navigate("Ranking", { points });
+      console.log("sudah diahkir quiz");
     } else {
       setCurrentQuestionIndex(0);
     }

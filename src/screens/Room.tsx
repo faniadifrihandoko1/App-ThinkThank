@@ -15,7 +15,7 @@ import { Feather } from "@expo/vector-icons";
 import { FlatList, ListRenderItem } from "react-native";
 import dataPlayer, { IPLayer } from "../mocks/dataPlayer";
 import { moderateScale as ms } from "react-native-size-matters";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 const Room = ({ navigation }: any) => {
   const [jumlahPlayer, setJumlahPlayer] = React.useState(0);
@@ -24,16 +24,16 @@ const Room = ({ navigation }: any) => {
   const [countdown, setCountdown] = React.useState<number>(30);
   useEffect(() => {
     const interval = setInterval(() => {
-      setCountdown(prevCountdown => prevCountdown - 1);
+      setCountdown((prevCountdown) => prevCountdown - 1);
     }, 1000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
     if (countdown === 0) {
       // Redirect ke halaman selanjutnya setelah countdown selesai
-      navigation.navigate('quiz');
+      navigation.navigate("quiz");
     }
   }, [countdown, navigation]);
 
