@@ -214,18 +214,19 @@ const Ranking = ({ navigation }: { navigation: any }) => {
             borderColor="$red900"
             borderWidth={1}
             w={"$1/2"}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => navigation.navigate("profile")}
           >
             <Text style={{ color: "white", fontWeight: "500" }}>
-              Return to Home
+              Back to Home
             </Text>
           </Button>
-          <Button
+          <Button 
             h={"$11"}
             bg="$success500"
             borderColor="$success900"
             borderWidth={1}
             w={"$1/2"}
+            onPress={() => navigation.navigate("room")}
           >
             <Text style={{ color: "white", fontWeight: "500" }}>
               Play Again
