@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import { useAuth, useOAuth } from "@clerk/clerk-expo";
-import { Button } from "@gluestack-ui/themed";
+import { Pressable, Text } from "@gluestack-ui/themed";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const SignOut = () => {
   const { isLoaded, signOut } = useAuth();
@@ -10,7 +11,18 @@ const SignOut = () => {
   }
   return (
     <View>
-      <Button onPress={() => signOut()}></Button>
+      <Pressable
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="flex-start"
+        py={20}
+        onPress={() => signOut()}
+      >
+        <MaterialCommunityIcons name="logout" size={24} color="black" />
+        <Text fontSize={18} fontWeight={"bold"}>
+          Sign Out
+        </Text>
+      </Pressable>
     </View>
   );
 };

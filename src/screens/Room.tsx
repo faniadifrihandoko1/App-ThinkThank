@@ -15,9 +15,29 @@ import { Feather } from "@expo/vector-icons";
 import { FlatList, ListRenderItem } from "react-native";
 import dataPlayer, { IPLayer } from "../mocks/dataPlayer";
 import { moderateScale as ms } from "react-native-size-matters";
+import { useNavigation } from '@react-navigation/native';
 
 const Room = ({ navigation }: any) => {
   const [jumlahPlayer, setJumlahPlayer] = React.useState(0);
+  // contdown
+  const navigations = useNavigation();
+  const [countdown, setCountdown] = React.useState<number>(30);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCountdown(prevCountdown => prevCountdown - 1);
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (countdown === 0) {
+      // Redirect ke halaman selanjutnya setelah countdown selesai
+      navigation.navigate('quiz');
+    }
+  }, [countdown, navigation]);
+
+  // contdown
 
   useEffect(() => {
     const batasPlayer = dataPlayer.filter((_, index) => index <5)
@@ -83,7 +103,7 @@ const Room = ({ navigation }: any) => {
         </Pressable>
         <Box alignItems="center" top={ms(20)} justifyContent="center">
           <Text fontWeight={"bold"} fontSize={"$6xl"}>
-            00 : 30
+            00 : {countdown}
           </Text>
           <Text fontSize={"$3xl"}>Waiting Room</Text>
           <Box flexDirection="row" display="flex">
