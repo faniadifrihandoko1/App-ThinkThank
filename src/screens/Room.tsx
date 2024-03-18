@@ -15,7 +15,11 @@ import { Feather } from "@expo/vector-icons";
 import { FlatList, ListRenderItem } from "react-native";
 import dataPlayer, { IPLayer } from "../mocks/dataPlayer";
 import { moderateScale as ms } from "react-native-size-matters";
+
+import { useNavigation } from "@react-navigation/native";
+
 import { useIsFocused, useNavigation } from '@react-navigation/native';
+
 
 const Room = ({ navigation }: any) => {
   const [jumlahPlayer, setJumlahPlayer] = React.useState(0);
@@ -24,6 +28,7 @@ const Room = ({ navigation }: any) => {
   const [isRunning, setIsRunning] = useState<boolean>(true);
   const initialCountdown = 10;
   useEffect(() => {
+
     let interval: NodeJS.Timeout;
 
     if (isRunning) {
@@ -41,10 +46,12 @@ const Room = ({ navigation }: any) => {
       }, 1000);
     }
 
+
     return () => clearInterval(interval);
   }, [initialCountdown, isRunning]);
 
   useEffect(() => {
+
     // Start countdown when component is mounted
     setIsRunning(true);
 
@@ -56,6 +63,7 @@ const Room = ({ navigation }: any) => {
 
     return unsubscribe;
   }, [initialCountdown]);
+
 
   // contdown
 

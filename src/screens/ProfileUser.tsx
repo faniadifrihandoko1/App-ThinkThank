@@ -127,7 +127,9 @@ const ProfileUser = ({ navigation }: any) => {
             <Button
               bg="#F8BD00"
               rounded={"$lg"}
+
               onPress={() => navigation.navigate("room")}
+
             >
               <Text color="$white" fontWeight={"bold"} fontSize={18}>
                 mulai quiz
