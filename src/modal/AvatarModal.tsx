@@ -123,10 +123,35 @@ const AvatarModal = () => {
             numColumns={3}
           />
           <ModalFooter
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          ></ModalFooter>
+              display="flex"
+              flexDirection="row"
+              justifyContent="center"
+              alignItems="center"
+              w={"100%"}
+            >
+              <Button
+                size="sm"
+                action="negative"
+                // w={"50%"}
+                mr="$3"
+                onPress={() => {
+                  setShowModal(false);
+                }}
+              >
+                <ButtonText>Cancel</ButtonText>
+              </Button>
+              <Button
+                  // w={"50%"}
+                size="sm"
+                action="positive"
+                borderWidth="$0"
+                onPress={() => {
+                  setShowModal(false);
+                }}
+              >
+                <ButtonText>Apply</ButtonText>
+              </Button>
+            </ModalFooter>
         </ModalContent>
       </Modal>
     </Center>

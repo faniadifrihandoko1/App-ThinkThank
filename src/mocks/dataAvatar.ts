@@ -1,9 +1,9 @@
-export interface Data {
+export interface IDummyAvatar {
     id: number
     image: string
 }[]
 
-const dataAvatar: Data[] = [
+const dataAvatar: IDummyAvatar[] = [
     {
         id: 1,
         image:"https://i.ibb.co/gwx2khL/bapakpani.png",
