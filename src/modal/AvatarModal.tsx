@@ -85,9 +85,10 @@ const AvatarModal = () => {
 
   return (
     <Center h={300}>
-      <Pressable onPress={() => setShowModal(true)} ref={ref}>
-        <FontAwesome name="pencil" size={20} color="black" />
+      <Pressable 
+      onPress={() => setShowModal(true)} ref={ref}>
       </Pressable>
+        <FontAwesome name="pencil" size={20} color="black" />
       <Modal
         isOpen={showModal}
         onClose={() => {
