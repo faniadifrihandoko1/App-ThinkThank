@@ -18,7 +18,9 @@ import { moderateScale as ms } from "react-native-size-matters";
 import { io } from "socket.io-client";
 import { useUser } from "@clerk/clerk-expo";
 
+
 const socket = io("http://192.168.18.25:3001");
+
 
 const Room = ({ navigation }: any) => {
   const { user } = useUser();
@@ -43,8 +45,10 @@ const Room = ({ navigation }: any) => {
     let interval: NodeJS.Timeout;
 
     if (isRunning) {
-      interval = setInterval(() => {
-        setCountdown((prevCountdown) => {
+
+      interval = setInterval(() => { 
+        setCountdown(prevCountdown => {
+
           if (prevCountdown === 1) {
             clearInterval(interval);
             setIsRunning(false);

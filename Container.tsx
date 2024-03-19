@@ -26,7 +26,7 @@ const Container = (props: Props) => {
         <Stack.Screen name="quiz" component={Quiz} />
         <Stack.Screen name="chat-room" component={ChatRoom} />
 
-        <Stack.Screen name="Ranking" component={Ranking} />
+        <Stack.Screen name="ranking" component={Ranking} />
 
         {/* <Stack.Screen name="store" component={Store} /> */}
       </Stack.Navigator>

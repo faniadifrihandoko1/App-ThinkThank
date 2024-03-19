@@ -9,6 +9,7 @@ import { TouchableWithoutFeedback } from "react-native";
 
 const Quiz = ({ navigation }: { navigation: any }) => {
   const [question, setQuestion] = React.useState<IQuestion[]>([]);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(18);
   const [selectAnswerIndex, setSelectAnswerIndex] = React.useState<
     number | null
@@ -16,6 +17,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
   const [answerTrue, setAnswerTrue] = React.useState(false);
   const [selectAnswer, setSelectAnswer] = React.useState("");
   const [timeRemaining, setTimeRemaining] = React.useState(1); // Waktu dalam detik
+
   const [timerRunning, setTimerRunning] = React.useState(false);
   const [points, setPoints] = React.useState(0);
 
@@ -68,7 +70,9 @@ const Quiz = ({ navigation }: { navigation: any }) => {
       setSelectAnswerIndex(null);
       setAnswerTrue(false);
     } else if (currentQuestionIndex === 19) {
+
       navigation.navigate("Ranking", { points });
+
       console.log("sudah diahkir quiz");
     } else {
       setCurrentQuestionIndex(0);
