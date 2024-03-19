@@ -16,10 +16,6 @@ import { FlatList, ListRenderItem } from "react-native";
 import dataPlayer, { IPLayer } from "../mocks/dataPlayer";
 import { moderateScale as ms } from "react-native-size-matters";
 
-import { useNavigation } from "@react-navigation/native";
-
-import { useIsFocused, useNavigation } from '@react-navigation/native';
-
 
 const Room = ({ navigation }: any) => {
   const [jumlahPlayer, setJumlahPlayer] = React.useState(0);
@@ -32,7 +28,7 @@ const Room = ({ navigation }: any) => {
     let interval: NodeJS.Timeout;
 
     if (isRunning) {
-      interval = setInterval(() => {
+      interval = setInterval(() => { 
         setCountdown(prevCountdown => {
           if (prevCountdown === 1) {
             clearInterval(interval);

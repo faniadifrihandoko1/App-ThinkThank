@@ -44,11 +44,21 @@ const Diamond = ({ navigation }: any) => {
       className={`
               active:scale-110
             hover:bg-slate-950
-              m-2`}
+              m-2 `}
       onPress={() => handleDiamond(item.id)}
     >
-      <Card w={"$24"} rounded={"$xl"} alignItems="center" key={item.id}>
-        <Text color="$green" fontWeight="bold">{item.diamond}</Text>
+      <Card
+        w={"$24"}
+        rounded={"$xl"}
+        justifyContent="center"
+        alignItems="center"
+        width={"$32"}
+        height={"$40"}
+        bg="#F8BD00"
+      >
+        <Text py={4} color="$green" fontFamily="roboto" fontWeight="bold">
+          {item.diamond}
+        </Text>
         <Image
           w={"$12"}
           h={"$12"}
@@ -64,17 +74,21 @@ const Diamond = ({ navigation }: any) => {
               bottom: 0,
             }}
           >
-            <FontAwesome name="check-circle" size={30} color="white" />
+            {/* <FontAwesome name="check-circle" size={30} color="white" /> */}
           </Box>
         )}
-        <View  >
-          <Text color="$red" fontSize={ms(8)}>Rp.{item.price}</Text>
+        <View alignItems="center" justifyContent="center" py={4} w={"$full"}>
+          <Text color="$red" fontSize={ms(12)}>
+            Rp.{item.price}
+          </Text>
         </View>
       </Card>
     </StyledPressable>
   );
 
-  const renderItem: ListRenderItem<IDiamond> = ({ item }) => <Item item={item} />;
+  const renderItem: ListRenderItem<IDiamond> = ({ item }) => (
+    <Item item={item} />
+  );
   return (
     <>
       <Center h={300}>
@@ -104,11 +118,13 @@ const Diamond = ({ navigation }: any) => {
           finalFocusRef={ref}
         >
           <ModalBackdrop />
-          <ModalContent w={"$full"}
+          <ModalContent
+            w={"$full"}
             maxHeight="60%"
             alignItems="center"
             overflow="visible"
-            >
+            backgroundColor="rgba(52, 52, 52, 0.9)"
+          >
             <Pressable
               bg="#F8BD00"
               w={"$32"}
@@ -121,13 +137,13 @@ const Diamond = ({ navigation }: any) => {
               <Text>Diamond</Text>
             </Pressable>
 
-            <FlatList 
-            data={dataModalDiamond}
-            renderItem={renderItem}
-            keyExtractor={(_, index) => index.toString()}
-            contentContainerStyle={{ alignItems: "center" }}
-            style={{ marginTop: ms(20) }}
-            numColumns={3}
+            <FlatList
+              data={dataModalDiamond}
+              renderItem={renderItem}
+              keyExtractor={(_, index) => index.toString()}
+              contentContainerStyle={{ alignItems: "center" }}
+              style={{ marginTop: ms(20) }}
+              numColumns={3}
             />
 
             <ModalFooter

@@ -53,10 +53,10 @@ const AvatarModal = () => {
     `}
       onPress={() => handleAvatar(item.id)}
     >
-      <Card w={"$20"} rounded={"$lg"} key={item.id}>
+      <Card w={"$20"} rounded={"$lg"} width={"$24"} height={"$32"} bg="#F8BD00">
         <Image
-          w={"$12"}
-          h={"$12"}
+          w={"$16"}
+          h={"$16"}
           rounded={"$full"}
           source={{
             uri: item.image,
@@ -73,11 +73,11 @@ const AvatarModal = () => {
             <FontAwesome name="check-circle" size={30} color="white" />
           </Box>
         )}
-        <View display="flex" alignItems="center" p={"$2"} flexDirection="row">
+        <View display="flex" justifyContent="center" alignItems="center" p={"$2"} flexDirection="row">
           <Text>{item.price}</Text>
           <Image w={"$4"} h={"$4"} source={D} />
         </View>
-      </Card>
+      </Card> 
     </StyledPressable>
   );
 
@@ -87,8 +87,8 @@ const AvatarModal = () => {
     <Center h={300}>
       <Pressable 
       onPress={() => setShowModal(true)} ref={ref}>
+        <FontAwesome name="pencil" size={20} color="white" />
       </Pressable>
-        <FontAwesome name="pencil" size={20} color="black" />
       <Modal
         isOpen={showModal}
         onClose={() => {
@@ -102,6 +102,7 @@ const AvatarModal = () => {
           maxHeight="60%"
           alignItems="center"
           overflow="visible"
+          backgroundColor="rgba(52, 52, 52, 0.9)"
         >
           <Pressable
             bg="#F8BD00"

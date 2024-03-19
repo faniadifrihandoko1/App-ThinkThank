@@ -18,6 +18,7 @@ import {
 } from "@gluestack-ui/themed";
 import Background from "../components/Background";
 import dataAvatarModal from "../mocks/dataAvatarModal";
+import { Feather } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import D from "../../assets/diamond-2.png";
 import { styled } from "nativewind";
@@ -25,14 +26,13 @@ import colors from "../utils/color";
 import AvatarModal from "../modal/AvatarModal";
 import Diamond from "../modal/Diamond";
 const StyledPressable = styled(Pressable);
+// interface IProfileUser {
+//   avatarId: ;
+// }
+const ProfileUser = ({ navigation }: any,) => {
+  
 
-const ProfileUser = ({ navigation }: any) => {
-  // #########
-  const [selectedAvatar, setSelectedAvatar] = React.useState(0);
-  const handleAvatar = (avatarId: number) => {
-    setSelectedAvatar(avatarId);
-  };
-  // #########
+ 
   return (
     <Background>
       <View height="100%" display="flex" flexDirection="column">
@@ -100,10 +100,10 @@ const ProfileUser = ({ navigation }: any) => {
             </Avatar>
             <Pressable
               position="absolute"
-              bg="#B5C0D0"
+              bg="#F8BD00"
               borderStyle="solid"
               borderWidth={1}
-              borderColor={"$black"}
+              borderColor={"$white"}
               w={30}
               h={30}
               bottom={0}
@@ -111,6 +111,7 @@ const ProfileUser = ({ navigation }: any) => {
               display="flex"
               justifyContent="center"
               alignItems="center"
+              borderRadius={"$full"}
             >
               <AvatarModal />
             </Pressable>
@@ -124,17 +125,15 @@ const ProfileUser = ({ navigation }: any) => {
         </Box>
         <Box px={50} mt={30}>
           <Box w={"100%"} rounded={"$xl"} bg="#4F46E4" px={30} py={20}>
-            <Button
+            <Pressable
               bg="#F8BD00"
               rounded={"$lg"}
-
+              p={8}
+              alignItems="center"
               onPress={() => navigation.navigate("room")}
-
             >
-              <Text color="$white" fontWeight={"bold"} fontSize={18}>
-                mulai quiz
-              </Text>
-            </Button>
+              <Text style={styles.buttonText}>mulai quiz</Text>
+            </Pressable>
           </Box>
         </Box>
       </View>
@@ -149,5 +148,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
+    fontFamily: "roboto",
   },
 });

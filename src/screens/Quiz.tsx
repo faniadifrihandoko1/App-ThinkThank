@@ -12,7 +12,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
   const [question, setQuestion] = React.useState<IQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
   const [selecetAnswer, setSelectAnswer] = React.useState<number | null>(null);
-  const [timeRemaining, setTimeRemaining] = React.useState(18); // Waktu dalam detik
+  const [timeRemaining, setTimeRemaining] = React.useState(1000); // Waktu dalam detik
   const [timerRunning, setTimerRunning] = React.useState(false);
   const [points, setPoints] = React.useState(0);
 
@@ -53,7 +53,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
       setSelectAnswer(null);
     } else if (currentQuestionIndex === 19) {
 
-      navigation.navigate("Ranking", { points });
+      navigation.navigate("ranking", { points });
       console.log("sudah diahkir quiz");
     } else {
 

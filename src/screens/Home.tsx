@@ -41,7 +41,7 @@ const StyledPressable = styled(Pressable);
 
 const Home = ({ navigation }: any) => {
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
-  const [name, setName] = React.useState("");
+  const [nama, setNama] = React.useState("");
   const { user } = useUser();
 
   const [isHovered, setIsHovered] = useState(false);
@@ -57,7 +57,7 @@ const Home = ({ navigation }: any) => {
   const handleSubmit = () => {
     const postProfile = {
       avatarId: selectedAvatar,
-      name: name,
+      name: nama,
     };
   };
 
@@ -141,7 +141,7 @@ const Home = ({ navigation }: any) => {
                     <Feather name="edit" size={24} color="white" />
                   </InputSlot>
                   <InputField
-                    onChange={(e: any) => setName(e.target.value)}
+                    onChange={(e: any) => setNama(e.target.value)}
                     color="white"
                     placeholder="Enter your name"
                   />
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "100%",
     paddingTop: 10,
-  },
+  }, 
   buttonHovered: {
     backgroundColor: "gray",
     color: "white",
