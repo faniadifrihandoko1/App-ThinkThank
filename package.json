@@ -48,7 +48,8 @@
     "react-native-size-matters": "^0.2.1",
     "react-native-svg": "^13.4.0",
     "react-native-web": "~0.19.6",
-    "react-three-fiber": "^6.0.13"
+    "react-three-fiber": "^6.0.13",
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

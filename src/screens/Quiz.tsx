@@ -8,11 +8,14 @@ import IQuestion, { questions as dataQuiz } from "../mocks/dataQuiz";
 import { TouchableWithoutFeedback } from "react-native";
 
 const Quiz = ({ navigation }: { navigation: any }) => {
-
   const [question, setQuestion] = React.useState<IQuestion[]>([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
-  const [selecetAnswer, setSelectAnswer] = React.useState<number | null>(null);
-  const [timeRemaining, setTimeRemaining] = React.useState(18); // Waktu dalam detik
+  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(18);
+  const [selectAnswerIndex, setSelectAnswerIndex] = React.useState<
+    number | null
+  >(null);
+  const [answerTrue, setAnswerTrue] = React.useState(false);
+  const [selectAnswer, setSelectAnswer] = React.useState("");
+  const [timeRemaining, setTimeRemaining] = React.useState(1); // Waktu dalam detik
   const [timerRunning, setTimerRunning] = React.useState(false);
   const [points, setPoints] = React.useState(0);
 
@@ -28,7 +31,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
         if (timeRemaining > 0) {
           setTimeRemaining((prevTime) => prevTime - 1);
         } else {
-          nextQuestion();
+          handleTimeUp();
         }
       }, 1000);
 
@@ -36,12 +39,24 @@ const Quiz = ({ navigation }: { navigation: any }) => {
     }
   }, [timeRemaining, timerRunning]);
 
+  const handleTimeUp = () => {
+    // setTimerRunning(false); // Berhenti timer
+    const correctAnswerIndex = currentQuestion?.correctAnswer;
+    if (selectAnswer === correctAnswerIndex) {
+      setPoints(points + 1000);
+      setAnswerTrue(true);
+    } else {
+      setAnswerTrue(false);
+    }
+    setTimeout(nextQuestion, 5000); // Pindah ke pertanyaan berikutnya
+  };
+
   const startTimer = () => {
     setTimerRunning(true);
   };
 
   const resetTimer = () => {
-    setTimeRemaining(1);
+    setTimeRemaining(18);
   };
 
   const currentQuestion = question[currentQuestionIndex];
@@ -50,25 +65,25 @@ const Quiz = ({ navigation }: { navigation: any }) => {
     if (currentQuestionIndex < question.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
       resetTimer();
-      setSelectAnswer(null);
+      setSelectAnswerIndex(null);
+      setAnswerTrue(false);
     } else if (currentQuestionIndex === 19) {
-
       navigation.navigate("Ranking", { points });
       console.log("sudah diahkir quiz");
     } else {
-
       setCurrentQuestionIndex(0);
     }
   };
 
-  const handleAnswer = (answer: number) => {
-    setSelectAnswer(answer);
+  const handleAnswer = (answer: number, option: string) => {
+    setSelectAnswerIndex(answer);
+    setSelectAnswer(option);
     if (answer === currentQuestion?.correctAnswer) {
       setPoints(points + 1000);
-      alert("jawaban benar");
-      nextQuestion();
+      // alert("jawaban benar");
+      // nextQuestion();
     } else {
-      alert("jawaban salah");
+      // alert("jawaban salah");
     }
   };
 
@@ -148,11 +163,17 @@ const Quiz = ({ navigation }: { navigation: any }) => {
               return (
                 <TouchableWithoutFeedback
                   key={index}
-                  onPress={() => handleAnswer(index)}
+                  onPress={() => handleAnswer(index, option)}
                 >
                   <Box
-                    borderColor="$black"
                     bgColor="white"
+                    borderColor={
+                      index === selectAnswerIndex
+                        ? answerTrue
+                          ? "$success900"
+                          : "$black"
+                        : "$black"
+                    }
                     borderWidth={2}
                     height={55}
                     borderRadius={"$md"}
@@ -165,16 +186,29 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                       </Text>
                     </Box>
                     {/* Jika user memilih maka menampilkan avatar di tiap colom jawaban yang dia pilih */}
-                    {/* <Box
-                    position="absolute"
-                    display="flex"
-                    flexDirection="row"
-                    right={10}
-                    gap={2}
-                    >
-                    <Card rounded={"$full"} width={"$3"} height={"$3"}></Card>
-                    <Card rounded={"$full"} width={"$3"} height={"$3"}></Card>
-                  </Box> */}
+                    {selectAnswerIndex === index && (
+                      <Box
+                        position="absolute"
+                        display="flex"
+                        flexDirection="row"
+                        right={10}
+                        gap={2}
+                        bg="red"
+                      >
+                        <Card
+                          rounded={"$full"}
+                          width={"$3"}
+                          height={"$3"}
+                          bg="#9BCF53"
+                        ></Card>
+                        <Card
+                          rounded={"$full"}
+                          width={"$3"}
+                          height={"$3"}
+                          bg="#9BCF53"
+                        ></Card>
+                      </Box>
+                    )}
                   </Box>
                 </TouchableWithoutFeedback>
               );
