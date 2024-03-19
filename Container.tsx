@@ -9,7 +9,7 @@ import Room from "./src/screens/Room";
 import Quiz from "./src/screens/Quiz";
 
 import Ranking from "./src/screens/Ranking";
-
+import ChatRoom from "./src/screens/ChatRoom";
 
 type Props = {};
 
@@ -24,6 +24,7 @@ const Container = (props: Props) => {
         <Stack.Screen name="profile" component={ProfileUser} />
         <Stack.Screen name="room" component={Room} />
         <Stack.Screen name="quiz" component={Quiz} />
+        <Stack.Screen name="chat-room" component={ChatRoom} />
 
         <Stack.Screen name="ranking" component={Ranking} />
 

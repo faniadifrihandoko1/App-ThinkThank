@@ -128,8 +128,10 @@ const ProfileUser = ({ navigation }: any,) => {
             <Pressable
               bg="#F8BD00"
               rounded={"$lg"}
+
               p={8}
               alignItems="center"
+
               onPress={() => navigation.navigate("room")}
             >
               <Text style={styles.buttonText}>mulai quiz</Text>

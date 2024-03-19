@@ -15,53 +15,67 @@ import { Feather } from "@expo/vector-icons";
 import { FlatList, ListRenderItem } from "react-native";
 import dataPlayer, { IPLayer } from "../mocks/dataPlayer";
 import { moderateScale as ms } from "react-native-size-matters";
+import { io } from "socket.io-client";
+import { useUser } from "@clerk/clerk-expo";
+
+
+const socket = io("http://192.168.18.25:3001");
 
 
 const Room = ({ navigation }: any) => {
+  const { user } = useUser();
+  const [player, setPlayer] = useState([]);
+
   const [jumlahPlayer, setJumlahPlayer] = React.useState(0);
   // contdown
   const [countdown, setCountdown] = React.useState<number>(10);
   const [isRunning, setIsRunning] = useState<boolean>(true);
   const initialCountdown = 10;
-  useEffect(() => {
 
+  // JANGAN DIHAPUS YEE
+  // useEffect(() => {
+  //   console.log("useeFFESDA");
+  //   socket.emit("join_room", user?.firstName);
+  //   socket.on("player_joined", (data: any) => {
+  //     console.log(data);
+  //   });
+  // }, []);
+
+  useEffect(() => {
     let interval: NodeJS.Timeout;
 
     if (isRunning) {
+
       interval = setInterval(() => { 
         setCountdown(prevCountdown => {
+
           if (prevCountdown === 1) {
             clearInterval(interval);
             setIsRunning(false);
-            navigation.navigate('quiz');
+            navigation.navigate("quiz");
             return initialCountdown;
-          } else {   
+          } else {
             return prevCountdown - 1;
           }
         });
       }, 1000);
     }
 
-
     return () => clearInterval(interval);
   }, [initialCountdown, isRunning]);
 
   useEffect(() => {
-
     // Start countdown when component is mounted
     setIsRunning(true);
 
     // Ensure countdown restarts when component is navigated back to
-    const unsubscribe = navigation.addListener('focus', () => {
+    const unsubscribe = navigation.addListener("focus", () => {
       setCountdown(initialCountdown);
       setIsRunning(true);
     });
 
     return unsubscribe;
   }, [initialCountdown]);
-
-
-  // contdown
 
   useEffect(() => {
     const batasPlayer = dataPlayer.filter((_, index) => index < 5);
