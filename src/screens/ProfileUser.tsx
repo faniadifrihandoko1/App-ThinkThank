@@ -25,14 +25,14 @@ import { styled } from "nativewind";
 import colors from "../utils/color";
 import AvatarModal from "../modal/AvatarModal";
 import Diamond from "../modal/Diamond";
+import userStore from "../store/user";
 const StyledPressable = styled(Pressable);
 // interface IProfileUser {
 //   avatarId: ;
 // }
-const ProfileUser = ({ navigation }: any,) => {
-  
+const ProfileUser = ({ navigation }: any) => {
+  const { avatar, diamond, username } = userStore((state) => state.user);
 
- 
   return (
     <Background>
       <View height="100%" display="flex" flexDirection="column">
@@ -47,7 +47,7 @@ const ProfileUser = ({ navigation }: any,) => {
         >
           <Box display="flex" flexDirection="row" alignItems="center">
             <Image
-              source={diamond}
+              source={D}
               position="relative"
               zIndex={10}
               alt={"diamond"}
@@ -66,7 +66,7 @@ const ProfileUser = ({ navigation }: any,) => {
               alignItems="center"
             >
               <ButtonText color="$black" fontWeight={"bold"} size="sm">
-                50
+                {diamond}
               </ButtonText>
             </Box>
             <Diamond />
@@ -91,12 +91,7 @@ const ProfileUser = ({ navigation }: any,) => {
             position="relative"
           >
             <Avatar shadowRadius={2} bg="$transparent">
-              <AvatarImage
-                source={ImgLogo1}
-                alt={"avatar user"}
-                w={80}
-                h={80}
-              />
+              <AvatarImage source={avatar} alt={"avatar user"} w={80} h={80} />
             </Avatar>
             <Pressable
               position="absolute"
@@ -117,7 +112,7 @@ const ProfileUser = ({ navigation }: any,) => {
             </Pressable>
           </Button>
           <Text fontWeight={"bold"} color="$black" mt={5}>
-            Fani Adi Frihandoko
+            {username ? username : "no username"}
           </Text>
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center" mt={30}>
@@ -128,10 +123,8 @@ const ProfileUser = ({ navigation }: any,) => {
             <Pressable
               bg="#F8BD00"
               rounded={"$lg"}
-
               p={8}
               alignItems="center"
-
               onPress={() => navigation.navigate("room")}
             >
               <Text style={styles.buttonText}>mulai quiz</Text>

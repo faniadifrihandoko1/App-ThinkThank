@@ -9,7 +9,9 @@ const UserLogin = () => {
     return null;
   }
 
-  return <Text>Hello, {user.firstName} welcome to Clerk</Text>;
+  return (
+    <Text>Hello, {user.emailAddresses[0].emailAddress} welcome to Clerk</Text>
+  );
 };
 
 export default UserLogin;
