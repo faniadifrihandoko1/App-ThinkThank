@@ -52,7 +52,7 @@ const Diamond = ({ navigation }: any) => {
         rounded={"$xl"}
         justifyContent="center"
         alignItems="center"
-        width={"$32"}
+        width={"$24"}
         height={"$40"}
         bg="#F8BD00"
       >
@@ -74,7 +74,7 @@ const Diamond = ({ navigation }: any) => {
               bottom: 0,
             }}
           >
-            {/* <FontAwesome name="check-circle" size={30} color="white" /> */}
+            <FontAwesome name="check-circle" size={30} color="white" />
           </Box>
         )}
         <View alignItems="center" justifyContent="center" py={4} w={"$full"}>
