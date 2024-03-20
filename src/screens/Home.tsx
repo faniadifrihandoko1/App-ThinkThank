@@ -37,14 +37,23 @@ import { useUser } from "@clerk/clerk-expo";
 import UserLogin from "../components/UserLogin";
 import { moderateScale as ms } from "react-native-size-matters";
 import Index from "../components/Index";
+import userStore from "../store/user";
 const StyledPressable = styled(Pressable);
 
 const Home = ({ navigation }: any) => {
   const [selectedAvatar, setSelectedAvatar] = React.useState(0);
+  const [avatar, setAvatar] = React.useState("");
   const [nama, setNama] = React.useState("");
-  const { user } = useUser();
-
   const [isHovered, setIsHovered] = useState(false);
+  const { user } = useUser();
+  const email = user?.emailAddresses[0].emailAddress;
+  const setEmail = userStore((state) => state.setEmail);
+  const setAvatarUsername = userStore((state) => state.updateUsernameAvatar);
+  React.useEffect(() => {
+    if (email) {
+      setEmail(email);
+    }
+  }, [email]);
 
   const handleHoverIn = () => {
     setIsHovered(true);
@@ -55,22 +64,27 @@ const Home = ({ navigation }: any) => {
   };
 
   const handleSubmit = () => {
-    const postProfile = {
-      avatarId: selectedAvatar,
-      name: nama,
-    };
+    console.log(nama);
+    setAvatarUsername(nama, avatar);
+    if (nama) {
+      navigation.navigate("profile");
+    } else {
+      alert("masukan username");
+    }
   };
 
   const postProfile = async (e: React.FormEvent<HTMLInputElement>) => {};
-  const handleAvatar = (avatarId: number) => {
+  const handleAvatar = (avatarId: number, image: string) => {
     setSelectedAvatar(avatarId);
+    setAvatar(image);
   };
+
   const AvatarDummy = ({ item }: { item: IDummyAvatar }) => (
     <StyledPressable
       className={`
           active:scale-110
     hover:bg-slate-950`}
-      onPress={() => handleAvatar(item.id)}
+      onPress={() => handleAvatar(item.id, item.image)}
     >
       <Avatar w={70} h={70}>
         <AvatarImage
@@ -140,9 +154,14 @@ const Home = ({ navigation }: any) => {
                   <InputSlot pl="$3">
                     <Feather name="edit" size={24} color="white" />
                   </InputSlot>
-                  <InputField
-                    onChange={(e: any) => setNama(e.target.value)}
+                  {/* <InputField
+                    onChange={handleChange}
                     color="white"
+                    placeholder="Enter your name"
+                  /> */}
+                  <TextInput
+                    style={{ width: "80%" }}
+                    onChangeText={(value) => setNama(value)}
                     placeholder="Enter your name"
                   />
                 </Input>
@@ -153,7 +172,7 @@ const Home = ({ navigation }: any) => {
                   ]}
                   onPressIn={handleHoverIn}
                   onPressOut={handleHoverOut}
-                  onPress={() => navigation.navigate("profile")}
+                  onPress={() => handleSubmit()}
                 >
                   <Text style={styles.text}>Continue</Text>
                 </Pressable>
@@ -174,7 +193,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "100%",
     paddingTop: 10,
-  }, 
+  },
   buttonHovered: {
     backgroundColor: "gray",
     color: "white",
