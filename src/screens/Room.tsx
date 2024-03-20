@@ -17,70 +17,33 @@ import dataPlayer, { IPLayer } from "../mocks/dataPlayer";
 import { moderateScale as ms } from "react-native-size-matters";
 import { io } from "socket.io-client";
 import { useUser } from "@clerk/clerk-expo";
+import userStore from "../store/user";
 
-
-const socket = io("http://192.168.18.25:3001");
-
+const socket = io("http://192.168.18.25:3000");
 
 const Room = ({ navigation }: any) => {
-  const { user } = useUser();
-  const [player, setPlayer] = useState([]);
-
-  const [jumlahPlayer, setJumlahPlayer] = React.useState(0);
-  // contdown
-  const [countdown, setCountdown] = React.useState<number>(10);
-  const [isRunning, setIsRunning] = useState<boolean>(true);
-  const initialCountdown = 10;
-
-  // JANGAN DIHAPUS YEE
-  // useEffect(() => {
-  //   console.log("useeFFESDA");
-  //   socket.emit("join_room", user?.firstName);
-  //   socket.on("player_joined", (data: any) => {
-  //     console.log(data);
-  //   });
-  // }, []);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-
-    if (isRunning) {
-
-      interval = setInterval(() => { 
-        setCountdown(prevCountdown => {
-
-          if (prevCountdown === 1) {
-            clearInterval(interval);
-            setIsRunning(false);
-            navigation.navigate("quiz");
-            return initialCountdown;
-          } else {
-            return prevCountdown - 1;
-          }
-        });
-      }, 1000);
-    }
-
-    return () => clearInterval(interval);
-  }, [initialCountdown, isRunning]);
-
-  useEffect(() => {
-    // Start countdown when component is mounted
-    setIsRunning(true);
-
-    // Ensure countdown restarts when component is navigated back to
-    const unsubscribe = navigation.addListener("focus", () => {
-      setCountdown(initialCountdown);
-      setIsRunning(true);
+  const [timer, setTimer] = React.useState(15);
+  const [userRoom, setUserRoom] = React.useState([]);
+  const username = userStore((state) => state.user.username);
+  React.useEffect(() => {
+    socket.emit("join_room", {
+      username: username,
+      socketId: socket.id,
     });
-
-    return unsubscribe;
-  }, [initialCountdown]);
-
-  useEffect(() => {
-    const batasPlayer = dataPlayer.filter((_, index) => index < 5);
-    setJumlahPlayer(batasPlayer.length);
+    socket.on("join_room", (users) => {
+      console.log(users.users.length);
+      setUserRoom(users.users);
+    });
+    console.log(userRoom.length);
+    socket.on("timer", (second) => {
+      console.log(second);
+      setTimer(second);
+      if (second === 1) {
+        navigation.navigate("quiz");
+      }
+    });
   }, []);
+
   const Player = ({ item }: { item: IPLayer }) => (
     <Box
       p={"$4"}
@@ -94,11 +57,7 @@ const Room = ({ navigation }: any) => {
       flexDirection="row"
     >
       <Avatar w={50} h={50}>
-        <AvatarImage
-          source={{
-            uri: item.image,
-          }}
-        />
+        <AvatarImage source="https://i.ibb.co/wCnzdSL/premium-Avatar1.png" />
       </Avatar>
       <Text
         px={"$2"}
@@ -107,7 +66,7 @@ const Room = ({ navigation }: any) => {
         fontSize={"$2xl"}
         alignItems="center"
       >
-        {item.name}
+        {item.username}
       </Text>
     </Box>
   );
@@ -118,45 +77,36 @@ const Room = ({ navigation }: any) => {
 
   return (
     <Background>
-      <View
-        height={"100%"}
-        // justifyContent={"center"}
-        flexDirection="column"
-        // alignItems={"center"}
-        // px={30}
-      >
+      <View height={"100%"} flexDirection="column">
         <Pressable
           h="20%"
           display="flex"
           flexDirection={"row"}
           justifyContent={"flex-end"}
           alignItems="center"
-          //   bg="yellow"
           px={30}
           mt={-50}
           onPress={() => navigation.navigate("profile")}
-          //   top={-80}
         >
           <Feather name="x-octagon" size={24} color="black" />
         </Pressable>
         <Box alignItems="center" top={ms(20)} justifyContent="center">
           <Text fontWeight={"bold"} fontSize={"$6xl"}>
-            00 : {countdown}
+            00 : {timer}
           </Text>
           <Text fontSize={"$3xl"}>Waiting Room</Text>
           <Box flexDirection="row" display="flex">
             <Text fontSize={"$3xl"} style={{ color: "green" }}>
-              {jumlahPlayer}
+              {userRoom.length}
             </Text>
             <Text fontSize={"$3xl"}> / 5</Text>
           </Box>
           <Box mt={ms(20)}>
             <FlatList
-              data={dataPlayer}
+              data={userRoom}
               renderItem={RenderItem}
               keyExtractor={(_, index) => index.toString()}
               contentContainerStyle={{ gap: 10 }}
-              // style={{ marginTop: }}
             />
           </Box>
         </Box>

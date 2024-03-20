@@ -10,7 +10,7 @@ import { TouchableWithoutFeedback } from "react-native";
 const Quiz = ({ navigation }: { navigation: any }) => {
   const [question, setQuestion] = React.useState<IQuestion[]>([]);
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(18);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(5);
   const [selectAnswerIndex, setSelectAnswerIndex] = React.useState<
     number | null
   >(null);
@@ -58,7 +58,9 @@ const Quiz = ({ navigation }: { navigation: any }) => {
   };
 
   const resetTimer = () => {
-    setTimeRemaining(1);
+
+    setTimeRemaining(5);
+
   };
 
   const currentQuestion = question[currentQuestionIndex];
@@ -71,7 +73,8 @@ const Quiz = ({ navigation }: { navigation: any }) => {
       setAnswerTrue(false);
     } else if (currentQuestionIndex === 19) {
 
-      navigation.navigate("ranking", { points });
+      navigation.navigate("Ranking", { points });
+
 
       console.log("sudah diahkir quiz");
     } else {
@@ -167,20 +170,26 @@ const Quiz = ({ navigation }: { navigation: any }) => {
               return (
                 <TouchableWithoutFeedback
                   key={index}
-                  onPress={() => handleAnswer(index, option)}
+                  onPress={() => {
+                    if (timeRemaining > 0) {
+                      // Memeriksa apakah waktu masih berjalan
+                      handleAnswer(index, option);
+                    }
+                  }}
                 >
                   <Box
                     bgColor="white"
                     borderColor={
                       selectAnswerIndex === index
-                        ? timeRemaining ===    0
-                          ? answerTrue 
-                            ? "$green"
-                            : "$red"  
-                          : "$gray"
-                        : "$gray"
+
+                        ? timeRemaining <= 0
+                          ? answerTrue
+                            ? "green" // Jika waktu habis dan jawaban benar, gunakan warna hijau
+                            : "red" // Jika waktu habis dan jawaban salah, gunakan warna merah
+                          : "gray" // Jika belum waktu habis, gunakan warna default
+                        : "gray" // Jika belum dipilih, gunakan warna default
                     }
-                    borderWidth={2}
+                    borderWidth={3}
                     height={55}
                     borderRadius={"$md"}
                     justifyContent="center"
@@ -199,14 +208,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                         flexDirection="row"
                         right={10}
                         gap={2}
-                        bg="red"
                       >
-                        <Card
-                          rounded={"$full"}
-                          width={"$3"}
-                          height={"$3"}
-                          bg="#9BCF53"
-                        ></Card>
                         <Card
                           rounded={"$full"}
                           width={"$3"}
