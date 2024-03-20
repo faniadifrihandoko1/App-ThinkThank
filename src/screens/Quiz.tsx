@@ -172,11 +172,13 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                   <Box
                     bgColor="white"
                     borderColor={
-                      index === selectAnswerIndex
-                        ? answerTrue
-                          ? "$success900"
-                          : "$black"
-                        : "$black"
+                      selectAnswerIndex === index
+                        ? timeRemaining ===    0
+                          ? answerTrue 
+                            ? "$green"
+                            : "$red"  
+                          : "$gray"
+                        : "$gray"
                     }
                     borderWidth={2}
                     height={55}
