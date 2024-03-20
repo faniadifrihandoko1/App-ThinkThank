@@ -52,7 +52,7 @@ const Diamond = ({ navigation }: any) => {
         rounded={"$xl"}
         justifyContent="center"
         alignItems="center"
-        width={"$32"}
+        width={"$24"}
         height={"$40"}
         bg="#F8BD00"
       >

@@ -65,8 +65,8 @@ const ProfileUser = ({ navigation }: any,) => {
               justifyContent="center"
               alignItems="center"
             >
-              <ButtonText color="$black" fontWeight={"bold"} size="sm">
-                50
+              <ButtonText color="$black" textAlign="center" w={"100%"} px={4} fontWeight={"bold"} size="sm">
+                9999
               </ButtonText>
             </Box>
             <Diamond />

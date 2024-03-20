@@ -58,7 +58,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
   };
 
   const resetTimer = () => {
-    setTimeRemaining(18);
+    setTimeRemaining(1);
   };
 
   const currentQuestion = question[currentQuestionIndex];
@@ -67,11 +67,11 @@ const Quiz = ({ navigation }: { navigation: any }) => {
     if (currentQuestionIndex < question.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
       resetTimer();
-      setSelectAnswerIndex(null);
+      setSelectAnswerIndex(null);55
       setAnswerTrue(false);
     } else if (currentQuestionIndex === 19) {
 
-      navigation.navigate("Ranking", { points });
+      navigation.navigate("ranking", { points });
 
       console.log("sudah diahkir quiz");
     } else {
