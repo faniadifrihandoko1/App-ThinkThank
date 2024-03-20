@@ -4,7 +4,11 @@ import bg from "../../assets/bg-2.jpeg";
 import { ImageBackground } from "@gluestack-ui/themed";
 
 const Background = ({ children }: { children: React.ReactNode }) => {
-  return <ImageBackground source={bg}>{children}</ImageBackground>;
+  return (
+    <ImageBackground alt="bg" source={bg}>
+      {children}
+    </ImageBackground>
+  );
 };
 
 export default Background;
