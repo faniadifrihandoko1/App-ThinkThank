@@ -58,7 +58,9 @@ const Quiz = ({ navigation }: { navigation: any }) => {
   };
 
   const resetTimer = () => {
+
     setTimeRemaining(5);
+
   };
 
   const currentQuestion = question[currentQuestionIndex];
@@ -67,10 +69,12 @@ const Quiz = ({ navigation }: { navigation: any }) => {
     if (currentQuestionIndex < question.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
       resetTimer();
-      setSelectAnswerIndex(null);
+      setSelectAnswerIndex(null);55
       setAnswerTrue(false);
     } else if (currentQuestionIndex === 19) {
+
       navigation.navigate("Ranking", { points });
+
 
       console.log("sudah diahkir quiz");
     } else {
@@ -177,6 +181,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                     bgColor="white"
                     borderColor={
                       selectAnswerIndex === index
+
                         ? timeRemaining <= 0
                           ? answerTrue
                             ? "green" // Jika waktu habis dan jawaban benar, gunakan warna hijau

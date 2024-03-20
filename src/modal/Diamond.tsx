@@ -26,18 +26,30 @@ import dataModalDiamond, { IDiamond } from "../mocks/dataModalDiamond";
 import { ListRenderItem, FlatList } from "react-native";
 import { styled } from "nativewind";
 import { Image } from "@gluestack-ui/themed";
+import userStore from "../store/user";
 const StyledPressable = styled(Pressable);
 
 const Diamond = ({ navigation }: any) => {
   const [selectedDiamond, setSelectedDiamond] = React.useState(0);
+  const setDiamond = userStore((state) => state.setDiamond);
+  const [diamonds, setDiamonds] = React.useState(0);
 
-  const handleDiamond = (diamondId: number) => {
+  const handleDiamond = (diamondId: number, diamond: number) => {
     setSelectedDiamond(diamondId);
+    setDiamonds(diamond);
+
   };
 
   const [showModal, setShowModal] = useState(false);
   console.log(showModal);
   const ref = React.useRef(null);
+  const handleSave = () => {
+    if (diamonds) {
+      setDiamond(diamonds);
+      setShowModal(false);
+    }
+  }
+  
 
   const Item = ({ item }: { item: IDiamond }) => (
     <StyledPressable
@@ -45,7 +57,7 @@ const Diamond = ({ navigation }: any) => {
               active:scale-110
             hover:bg-slate-950
               m-2 `}
-      onPress={() => handleDiamond(item.id)}
+      onPress={() => handleDiamond(item.id, item.diamond || 0)}
     >
       <Card
         w={"$24"}
@@ -165,9 +177,7 @@ const Diamond = ({ navigation }: any) => {
                 size="sm"
                 action="positive"
                 borderWidth="$0"
-                onPress={() => {
-                  setShowModal(false);
-                }}
+                onPress={handleSave}
               >
                 <ButtonText>Save</ButtonText>
               </Button>

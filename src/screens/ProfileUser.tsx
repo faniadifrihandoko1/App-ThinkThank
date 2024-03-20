@@ -20,7 +20,10 @@ import Background from "../components/Background";
 import dataAvatarModal from "../mocks/dataAvatarModal";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+
+import logo from "../../assets/logo.png";
 import D from "../../assets/diamond-2.png";
+
 import { styled } from "nativewind";
 import colors from "../utils/color";
 import AvatarModal from "../modal/AvatarModal";
@@ -41,10 +44,20 @@ const ProfileUser = ({ navigation }: any) => {
           px={30}
           display="flex"
           flexDirection="row"
-          justifyContent="flex-end"
+          justifyContent="space-between"
           alignItems="center"
           mt={-80}
         >
+          <Image
+            source={logo}
+            position="relative"
+            zIndex={10}
+            alt={"diamond"}
+            width={70}
+            height={40}
+            objectFit={"contain"}
+            marginRight={-10}
+          />
           <Box display="flex" flexDirection="row" alignItems="center">
             <Image
               source={D}

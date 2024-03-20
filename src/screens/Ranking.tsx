@@ -109,7 +109,6 @@ const Ranking = ({ navigation }: { navigation: any }) => {
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "space-between",
-
                   paddingTop: 10,
                 }}
               >

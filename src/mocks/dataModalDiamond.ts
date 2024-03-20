@@ -2,7 +2,7 @@ export interface IDiamond {
     id: number
     image: string
     price?: number |string
-    diamond?: number |string
+    diamond?: number | undefined
 }[]
 
 const dataModalDiamond: IDiamond[] = [
@@ -40,7 +40,7 @@ const dataModalDiamond: IDiamond[] = [
         id: 6,
         image:"https://i.ibb.co/1Kg2VM6/500.png",
         price: 69000,
-        diamond: 500,
+        diamond: 665,
     },
     // {
     //     id: 4,

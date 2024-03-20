@@ -17,6 +17,8 @@ const initialState: IUser = {
   diamond: 0,
 };
 
+
+
 interface UserStore {
   user: IUser;
   setEmail: (email: string) => void;
@@ -28,10 +30,12 @@ interface UserStore {
 }
 
 const userStore = create<UserStore>((set) => ({
+
   user: initialState, // initial state
   setEmail: (
     email: string // action to update the state
   ) => set((state) => ({ user: { ...state.user, email } })),
+
   setUsername: (username: string) =>
     set((state) => ({ user: { ...state.user, username } })),
   updateUsernameAvatar: (username: string, avatar: string) =>
