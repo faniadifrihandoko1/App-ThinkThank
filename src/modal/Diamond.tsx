@@ -37,7 +37,6 @@ const Diamond = ({ navigation }: any) => {
   const handleDiamond = (diamondId: number, diamond: number) => {
     setSelectedDiamond(diamondId);
     setDiamonds(diamond);
-
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -48,8 +47,7 @@ const Diamond = ({ navigation }: any) => {
       setDiamond(diamonds);
       setShowModal(false);
     }
-  }
-  
+  };
 
   const Item = ({ item }: { item: IDiamond }) => (
     <StyledPressable
@@ -66,9 +64,11 @@ const Diamond = ({ navigation }: any) => {
         alignItems="center"
         width={"$24"}
         height={"$40"}
-        bg="#F8BD00"
+        borderWidth={2}
+        borderColor="white"
+        backgroundColor="rgba(52, 52, 52, 0.9)"
       >
-        <Text py={4} color="$green" fontFamily="roboto" fontWeight="bold">
+        <Text pb={10} color="$light100" fontWeight="bold">
           {item.diamond}
         </Text>
         <Image
@@ -89,8 +89,8 @@ const Diamond = ({ navigation }: any) => {
             <FontAwesome name="check-circle" size={30} color="white" />
           </Box>
         )}
-        <View alignItems="center" justifyContent="center" py={4} w={"$full"}>
-          <Text color="$red" fontSize={ms(12)}>
+        <View alignItems="center" justifyContent="center" pt={10} w={"$full"}>
+          <Text color="$red" fontWeight="bold" fontSize={ms(13)} fontStyle="italic">
             Rp.{item.price}
           </Text>
         </View>
@@ -164,6 +164,7 @@ const Diamond = ({ navigation }: any) => {
               alignItems="center"
             >
               <Button
+                w={130}
                 size="sm"
                 action="negative"
                 mr="$3"
@@ -174,6 +175,7 @@ const Diamond = ({ navigation }: any) => {
                 <ButtonText>Cancel</ButtonText>
               </Button>
               <Button
+                w={130}
                 size="sm"
                 action="positive"
                 borderWidth="$0"

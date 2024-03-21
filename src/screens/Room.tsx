@@ -1,22 +1,20 @@
-import { Animated, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   Avatar,
   AvatarImage,
   Box,
-  Card,
   Text,
   View,
   Pressable,
 } from "@gluestack-ui/themed";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Background from "../components/Background";
 import { Feather } from "@expo/vector-icons";
 import { FlatList, ListRenderItem } from "react-native";
-import dataPlayer, { IPLayer } from "../mocks/dataPlayer";
+import { IPLayer } from "../mocks/dataPlayer";
 import { moderateScale as ms } from "react-native-size-matters";
 import { io } from "socket.io-client";
-import { useUser } from "@clerk/clerk-expo";
 import userStore from "../store/user";
 
 const socket = io("http://192.168.18.25:3000");

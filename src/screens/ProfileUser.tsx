@@ -1,7 +1,4 @@
 import React from "react";
-
-import ImgLogo1 from "../../assets/bapaksripal.png";
-import diamond from "../../assets/diamond.png";
 import cube from "../../assets/cube.png";
 
 import { StyleSheet } from "react-native";
@@ -17,22 +14,15 @@ import {
   Image,
 } from "@gluestack-ui/themed";
 import Background from "../components/Background";
-import dataAvatarModal from "../mocks/dataAvatarModal";
-import { Feather } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 
 import logo from "../../assets/logo.png";
 import D from "../../assets/diamond-2.png";
 
 import { styled } from "nativewind";
-import colors from "../utils/color";
 import AvatarModal from "../modal/AvatarModal";
 import Diamond from "../modal/Diamond";
 import userStore from "../store/user";
 const StyledPressable = styled(Pressable);
-// interface IProfileUser {
-//   avatarId: ;
-// }
 const ProfileUser = ({ navigation }: any) => {
   const { avatar, diamond, username } = userStore((state) => state.user);
 
