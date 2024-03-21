@@ -4,20 +4,17 @@ import {
   FlatList,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
 } from "react-native";
 import {
   SafeAreaView,
   ScrollView,
   KeyboardAvoidingView,
-  ImageBackground,
   Pressable,
 } from "react-native";
 
 import {
   Input,
   InputSlot,
-  InputField,
   Image,
   View,
   Text,
@@ -28,16 +25,15 @@ import logo from "../../assets/logo.png";
 import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
-import { styled } from "nativewind";
 import dataAvatar, { IDummyAvatar } from "../mocks/dataAvatar";
 import { Avatar, AvatarImage, Box, Card } from "@gluestack-ui/themed";
 import Background from "../components/Background";
 import SignOut from "../components/SignOut";
 import { useUser } from "@clerk/clerk-expo";
 import UserLogin from "../components/UserLogin";
-import { moderateScale as ms } from "react-native-size-matters";
 import Index from "../components/Index";
 import userStore from "../store/user";
+import { styled } from "nativewind";
 const StyledPressable = styled(Pressable);
 
 const Home = ({ navigation }: any) => {

@@ -24,7 +24,6 @@ import {
 
 import { FontAwesome } from "@expo/vector-icons";
 
-import Av1 from "../../assets/premiumAvatar2.png";
 import D from "../../assets/diamond-2.png";
 import dataAvatarModal, { IAvatar } from "../mocks/dataAvatarModal";
 import { styled } from "nativewind";
@@ -75,7 +74,15 @@ const AvatarModal = () => {
     `}
       onPress={() => handleAvatar(item.id, item.image, item.price || 0)}
     >
-      <Card w={"$20"} rounded={"$lg"} width={"$24"} height={"$32"} bg="#F8BD00">
+      <Card
+        w={"$20"}
+        rounded={"$lg"}
+        width={"$24"}
+        height={"$32"}
+        borderWidth={2}
+        borderColor="white"
+        backgroundColor="rgba(52, 52, 52, 0.9)"
+      >
         <Image
           w={"$16"}
           h={"$16"}
@@ -102,8 +109,10 @@ const AvatarModal = () => {
           p={"$2"}
           flexDirection="row"
         >
-          <Text>{item.price}</Text>
-          <Image w={"$4"} h={"$4"} source={D} />
+          <Text color="$white" fontWeight="bold">
+            {item.price === 0 ? "Free" : item.price}
+          </Text>
+          {item.id > 3 && <Image w={"$4"} h={"$4"} source={D} />}
         </View>
       </Card>
     </StyledPressable>
@@ -163,7 +172,7 @@ const AvatarModal = () => {
             <Button
               size="sm"
               action="negative"
-              // w={"50%"}
+              w={130}
               mr="$3"
               onPress={() => {
                 setShowModal(false);
@@ -172,7 +181,7 @@ const AvatarModal = () => {
               <ButtonText>Cancel</ButtonText>
             </Button>
             <Button
-              // w={"50%"}
+              w={130}
               size="sm"
               action="positive"
               borderWidth="$0"

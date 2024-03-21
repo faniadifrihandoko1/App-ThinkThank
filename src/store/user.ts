@@ -1,4 +1,4 @@
-import { Alert } from "react-native";
+
 import { create } from "zustand";
 
 interface IUser {
