@@ -25,6 +25,7 @@
     "@react-navigation/native-stack": "^6.9.22",
     "@react-three/drei": "^9.102.6",
     "axios": "^1.6.7",
+    "dotenv": "^16.4.5",
     "expo": "~50.0.8",
     "expo-auth-session": "~5.4.0",
     "expo-constants": "^15.4.5",
@@ -33,6 +34,7 @@
     "expo-secure-store": "~12.8.1",
     "expo-status-bar": "~1.11.1",
     "expo-web-browser": "~12.8.2",
+    "lottie-react-native": "^6.7.0",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -48,6 +50,7 @@
     "react-native-size-matters": "^0.2.1",
     "react-native-svg": "^13.4.0",
     "react-native-web": "~0.19.6",
+    "react-native-webview": "^13.8.1",
     "react-three-fiber": "^6.0.13",
     "socket.io-client": "^4.7.5",
     "zustand": "^4.5.2"

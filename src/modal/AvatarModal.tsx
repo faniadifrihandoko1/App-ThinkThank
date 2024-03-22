@@ -189,7 +189,7 @@ const AvatarModal = () => {
                 handleSave();
               }}
             >
-              <ButtonText>Apply</ButtonText>
+              <ButtonText>$Buy</ButtonText>
             </Button>
           </ModalFooter>
         </ModalContent>
