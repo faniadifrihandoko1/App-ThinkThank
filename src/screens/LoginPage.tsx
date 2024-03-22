@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
-import React, { useCallback } from "react";
+import React from "react";
 import * as WebBrowser from "expo-web-browser";
 import { useWarmUpBrowser } from "../hooks/useWarmUpBrowser";
-import { Box, Button, Image, Pressable } from "@gluestack-ui/themed";
+import { Box, Image, Pressable } from "@gluestack-ui/themed";
 import logo from "../../assets/logo.png";
 import bg from "../../assets/bg-2.jpeg";
 import { useOAuth } from "@clerk/clerk-expo";
-import { err } from "react-native-svg/lib/typescript/xml";
 
 WebBrowser.maybeCompleteAuthSession();
 const LoginPage = () => {
@@ -33,7 +32,7 @@ const LoginPage = () => {
   }, []);
 
   return (
-    <ImageBackground source={bg} style={styles.background}>
+    <ImageBackground source={bg}  style={styles.background}>
       <View
         style={{
           flex: 1,
