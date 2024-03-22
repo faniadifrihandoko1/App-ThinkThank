@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   ListRenderItem,
   FlatList,
@@ -11,13 +12,8 @@ import {
   Pressable,
 } from "react-native";
 
-import {
-  Input,
-  InputSlot,
-  Image,
-  View,
-  Text,
-} from "@gluestack-ui/themed";
+
+import { Input, InputSlot, Image, View, Text } from "@gluestack-ui/themed";
 
 import logo from "../../assets/logo.png";
 
@@ -30,7 +26,7 @@ import Background from "../components/Background";
 import SignOut from "../components/SignOut";
 import { useUser } from "@clerk/clerk-expo";
 import UserLogin from "../components/UserLogin";
-import Index from "../components/Index";
+
 import userStore from "../store/user";
 import { styled } from "nativewind";
 const StyledPressable = styled(Pressable);
@@ -68,13 +64,20 @@ const Home = ({ navigation }: any) => {
     }
   };
 
-  const postProfile = async (e: React.FormEvent<HTMLInputElement>) => {};
   const handleAvatar = (avatarId: number, image: string) => {
     setSelectedAvatar(avatarId);
     setAvatar(image);
   };
 
-  const AvatarDummy = ({ item, index }: { item: IDummyAvatar, index: number }) => (
+
+  const AvatarDummy = ({
+    item,
+    index,
+  }: {
+    item: IDummyAvatar;
+    index: number;
+  }) => (
+
     <StyledPressable
       key={index}
       className={`
@@ -84,6 +87,7 @@ const Home = ({ navigation }: any) => {
     >
       <Avatar w={70} h={70}>
         <AvatarImage
+          alt="avatar"
           source={{
             uri: item.image,
           }}
@@ -103,7 +107,9 @@ const Home = ({ navigation }: any) => {
       </Avatar>
     </StyledPressable>
   );
-  const renderItem: ListRenderItem<IDummyAvatar> = ({ item , index}) => (
+
+  const renderItem: ListRenderItem<IDummyAvatar> = ({ item, index }) => (
+
     <AvatarDummy item={item} index={index} />
   );
 
@@ -119,7 +125,9 @@ const Home = ({ navigation }: any) => {
                 marginBottom={60}
               >
                 <View style={{ alignItems: "center", marginTop: 60 }}>
+
                   <Image style={{ width: 260, height: 200 }} alt="logo" source={logo} />
+
                   <Text
                     style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
                   >
@@ -139,9 +147,12 @@ const Home = ({ navigation }: any) => {
                   justifyContent="center"
                 >
                   <FlatList
+                    scrollEnabled={false}
                     data={dataAvatar}
                     renderItem={renderItem}
-                    keyExtractor={(_, index) => Index.toString()}
+                    keyExtractor={(recipe, index) =>
+                      `recipe-${index}-${recipe.id.toString()}`
+                    }
                     contentContainerStyle={{ alignItems: "center" }}
                     numColumns={4}
                   />

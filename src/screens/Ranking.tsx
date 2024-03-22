@@ -9,6 +9,8 @@ import juara3 from "../../assets/juara03.png";
 import img1 from "../../assets/bapaksripal.png";
 import { Avatar } from "@gluestack-ui/themed";
 import { FontAwesome5 } from "@expo/vector-icons";
+
+
 import LottieView from "lottie-react-native";
 
 const Ranking = ({ navigation }: { navigation: any }) => {
@@ -221,7 +223,9 @@ const Ranking = ({ navigation }: { navigation: any }) => {
             borderColor="$red900"
             borderWidth={1}
             w={"$1/2"}
-            onPress={() => navigation.push("profile")}
+
+            onPress={() => navigation.navigate("profile")}
+
           >
             <Text style={{ color: "white", fontWeight: "500" }}>
               Back to Home

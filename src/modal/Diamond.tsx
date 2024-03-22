@@ -17,6 +17,8 @@ import React, { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { moderateScale as ms } from "react-native-size-matters";
 
+import { WebView } from 'react-native-webview';
+
 import dataModalDiamond, { IDiamond } from "../mocks/dataModalDiamond";
 import { ListRenderItem, FlatList } from "react-native";
 import { styled } from "nativewind";
@@ -44,7 +46,9 @@ const Diamond = ({ navigation }: any) => {
     }
   };
 
+
   const Item = ({ item, index } : { item: IDiamond, index: number }) => (
+
     <StyledPressable
       key={index}
       className={`
@@ -52,6 +56,7 @@ const Diamond = ({ navigation }: any) => {
             hover:bg-slate-950
               m-2 `}
       onPress={() => handleDiamond(item.id, item.diamond || 0)}
+      // onPress={() => handlePayment()}
     >
       <Card
         w={"$24"}
@@ -186,6 +191,12 @@ const Diamond = ({ navigation }: any) => {
                 <ButtonText>CheckOut</ButtonText>
               </Button>
             </ModalFooter>
+            {/* <View>
+              <Pressable  onPress={handlePayment()} />
+              <WebView
+                source={{ uri: "https://app.stg.midtrans.com/snap/snap.js" }}
+              />
+            </View> */}
           </ModalContent>
         </Modal>
       </Center>

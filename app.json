@@ -4,6 +4,7 @@
     "slug": "my-app-trivia",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "my-app-trivia",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -13,19 +14,26 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.anonymous.myapptrivia",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.my-app-trivia",
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": ["my-app-trivia"]
+          }
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
+
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.myapptrivia"
+      "package": "com.my-app-trivia"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "plugins": ["expo-secure-store"]
+    }
   }
 }
