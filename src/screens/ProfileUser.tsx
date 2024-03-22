@@ -57,7 +57,7 @@ const ProfileUser = ({ navigation }: any) => {
               width={25}
               height={25}
               objectFit={"contain"}
-              marginRight={-10}
+              marginRight={-8}
             />
 
             <Box
