@@ -22,6 +22,8 @@ import React, { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { moderateScale as ms } from "react-native-size-matters";
 
+import { WebView } from 'react-native-webview';
+
 import dataModalDiamond, { IDiamond } from "../mocks/dataModalDiamond";
 import { ListRenderItem, FlatList } from "react-native";
 import { styled } from "nativewind";
@@ -49,6 +51,38 @@ const Diamond = ({ navigation }: any) => {
     }
   };
 
+  // PAYMENT GATEWAY EMBEDMODE
+
+  // const handlePayment = () => {
+  //   const handlePress = () => {
+  //     const snap = (window as any).snap;
+  //     if (snap) {
+  //       snap.embed("TRANSACTION_TOKEN_HERE", {
+  //         embedId: "snap-container",
+  //         onSuccess: (result: any) => {
+  //           alert("Payment success!");
+  //           console.log(result);
+  //         },
+  //         onPending: (result: any) => {
+  //           alert("Waiting for your payment!");
+  //           console.log(result);
+  //         },
+  //         onError: (result: any) => {
+  //           alert("Payment failed!");
+  //           console.log(result);
+  //         },
+  //         onClose: () => {
+  //           alert("You closed the popup without finishing the payment");
+  //         },
+  //       });
+  //     }
+  //   };
+
+  //   return handlePress;
+  // };
+
+  // PAYMENT GATEWAY EMBEDMODE
+
   const Item = ({ item }: { item: IDiamond }) => (
     <StyledPressable
       className={`
@@ -56,6 +90,7 @@ const Diamond = ({ navigation }: any) => {
             hover:bg-slate-950
               m-2 `}
       onPress={() => handleDiamond(item.id, item.diamond || 0)}
+      // onPress={() => handlePayment()}
     >
       <Card
         w={"$24"}
@@ -90,7 +125,12 @@ const Diamond = ({ navigation }: any) => {
           </Box>
         )}
         <View alignItems="center" justifyContent="center" pt={10} w={"$full"}>
-          <Text color="$red" fontWeight="bold" fontSize={ms(13)} fontStyle="italic">
+          <Text
+            color="$red"
+            fontWeight="bold"
+            fontSize={ms(13)}
+            fontStyle="italic"
+          >
             Rp.{item.price}
           </Text>
         </View>
@@ -181,9 +221,15 @@ const Diamond = ({ navigation }: any) => {
                 borderWidth="$0"
                 onPress={handleSave}
               >
-                <ButtonText>Save</ButtonText>
+                <ButtonText>CheckOut</ButtonText>
               </Button>
             </ModalFooter>
+            {/* <View>
+              <Pressable  onPress={handlePayment()} />
+              <WebView
+                source={{ uri: "https://app.stg.midtrans.com/snap/snap.js" }}
+              />
+            </View> */}
           </ModalContent>
         </Modal>
       </Center>

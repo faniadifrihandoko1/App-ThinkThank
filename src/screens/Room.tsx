@@ -17,7 +17,7 @@ import { moderateScale as ms } from "react-native-size-matters";
 import { io } from "socket.io-client";
 import userStore from "../store/user";
 
-const socket = io("http://192.168.18.25:3000");
+const socket = io("http://192.168.18.17:3000");
 
 const Room = ({ navigation }: any) => {
   const [timer, setTimer] = React.useState(15);
