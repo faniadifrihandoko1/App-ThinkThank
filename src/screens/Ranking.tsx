@@ -30,6 +30,11 @@ const Ranking = ({ navigation }: { navigation: any }) => {
     rank: index + 1,
   }));
 
+  // Mengatur urutan juara
+  const temp = ranking[0]; // Simpan juara pertama sementara
+  ranking[0] = ranking[1]; // Juara kedua menjadi juara pertama
+  ranking[1] = temp; // Juara pertama menjadi juara kedua
+
   useEffect(
     () =>
       Animated.timing(animatedValue, {
@@ -213,13 +218,13 @@ const Ranking = ({ navigation }: { navigation: any }) => {
             borderColor="$red900"
             borderWidth={1}
             w={"$1/2"}
-            onPress={() => navigation.navigate("profile")}
+            onPress={() => navigation.push("ranking")}
           >
             <Text style={{ color: "white", fontWeight: "500" }}>
               Back to Home
             </Text>
           </Button>
-          <Button 
+          <Button
             h={"$11"}
             bg="$success500"
             borderColor="$success900"

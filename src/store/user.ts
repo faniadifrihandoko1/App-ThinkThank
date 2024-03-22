@@ -1,4 +1,3 @@
-
 import { create } from "zustand";
 
 interface IUser {
@@ -17,8 +16,6 @@ const initialState: IUser = {
   diamond: 0,
 };
 
-
-
 interface UserStore {
   user: IUser;
   setEmail: (email: string) => void;
@@ -30,7 +27,6 @@ interface UserStore {
 }
 
 const userStore = create<UserStore>((set) => ({
-
   user: initialState, // initial state
   setEmail: (
     email: string // action to update the state
@@ -43,7 +39,9 @@ const userStore = create<UserStore>((set) => ({
   setAvatar: (avatar: string) =>
     set((state) => ({ user: { ...state.user, avatar } })),
   setDiamond: (diamond: number) =>
-    set((state) => ({ user: { ...state.user, diamond } })),
+    set((state) => ({
+      user: { ...state.user, diamond: state.user.diamond + diamond },
+    })),
   setDiamondMin: (diamond: number) =>
     set((state) => ({
       user: { ...state.user, diamond: state.user.diamond - diamond },
