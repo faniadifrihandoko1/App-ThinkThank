@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import { useAuth, useOAuth } from "@clerk/clerk-expo";
+import { useAuth } from "@clerk/clerk-expo";
 import { Pressable, Text } from "@gluestack-ui/themed";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 

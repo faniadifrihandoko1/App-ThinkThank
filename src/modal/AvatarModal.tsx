@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Avatar,
-  AvatarImage,
   Card,
   Pressable,
   View,
@@ -11,14 +9,9 @@ import {
   ButtonText,
   Center,
   Modal,
-  Icon,
   ModalBackdrop,
-  ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader,
-  CloseIcon,
   Image,
 } from "@gluestack-ui/themed";
 
@@ -65,8 +58,9 @@ const AvatarModal = () => {
   console.log(showModal);
   const ref = React.useRef(null);
 
-  const Item = ({ item }: { item: IAvatar }) => (
+  const Item = ({ item, index }: { item: IAvatar, index: number }) => (
     <StyledPressable
+      key={index}
       className={`
     active:scale-110
     hover:bg-slate-950
@@ -90,6 +84,7 @@ const AvatarModal = () => {
           source={{
             uri: item.image,
           }}
+          alt="image"
         />
         {selectedAvatar === item.id && (
           <Box
@@ -112,14 +107,14 @@ const AvatarModal = () => {
           <Text color="$white" fontWeight="bold">
             {item.price === 0 ? "Free" : item.price}
           </Text>
-          {item.id > 3 && <Image w={"$4"} h={"$4"} source={D} />}
+          {item.id > 3 && <Image w={"$4"} h={"$4"} alt="diamond" source={D} />}
         </View>
       </Card>
     </StyledPressable>
   );
 
   const renderItem: ListRenderItem<IAvatar> = ({ item }) => (
-    <Item item={item} />
+    <Item item={item}  index={item.id}/>
   );
 
   return (

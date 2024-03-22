@@ -1,28 +1,30 @@
-import { ProgressBarAndroidBase, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import Background from "../components/Background";
-import { Box, Button, Card, Text } from "@gluestack-ui/themed";
+import { Box, Text,Avatar, AvatarImage } from "@gluestack-ui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
 import IQuestion, { questions as dataQuiz } from "../mocks/dataQuiz";
 import { TouchableWithoutFeedback } from "react-native";
+import userStore from "../store/user";
 
 const Quiz = ({ navigation }: { navigation: any }) => {
   const [question, setQuestion] = React.useState<IQuestion[]>([]);
+
+  const avatar = userStore((state) => state.user.avatar);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(5);
   const [selectAnswerIndex, setSelectAnswerIndex] = React.useState<
     number | null
   >(null);
-  const [answerTrue, setAnswerTrue] = React.useState(false);
   const [selectAnswer, setSelectAnswer] = React.useState("");
-  const [timeRemaining, setTimeRemaining] = React.useState(1); // Waktu dalam detik
+  const [timeRemaining, setTimeRemaining] = React.useState(10); // Waktu dalam detik
 
   const [timerRunning, setTimerRunning] = React.useState(false);
   const [points, setPoints] = React.useState(0);
 
   React.useEffect(() => {
-    setQuestion(dataQuiz);
+    setQuestion(dataQuiz.slice(0, 10));
     setCurrentQuestionIndex(0);
     startTimer();
   }, []);
@@ -42,15 +44,13 @@ const Quiz = ({ navigation }: { navigation: any }) => {
   }, [timeRemaining, timerRunning]);
 
   const handleTimeUp = () => {
-    // setTimerRunning(false); // Berhenti timer
     const correctAnswerIndex = currentQuestion?.correctAnswer;
     if (selectAnswer === correctAnswerIndex) {
       setPoints(points + 1000);
-      setAnswerTrue(true);
+      // setTimerRunning(false); // Berhenti timer
     } else {
-      setAnswerTrue(false);
     }
-    setTimeout(nextQuestion, 5000); // Pindah ke pertanyaan berikutnya
+    setTimeout(nextQuestion, 2000); // Pindah ke pertanyaan berikutnya
   };
 
   const startTimer = () => {
@@ -58,9 +58,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
   };
 
   const resetTimer = () => {
-
     setTimeRemaining(5);
-
   };
 
   const currentQuestion = question[currentQuestionIndex];
@@ -69,12 +67,9 @@ const Quiz = ({ navigation }: { navigation: any }) => {
     if (currentQuestionIndex < question.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
       resetTimer();
-      setSelectAnswerIndex(null);55
-      setAnswerTrue(false);
-    } else if (currentQuestionIndex === 19) {
-
-      navigation.navigate("Ranking", { points });
-
+      setSelectAnswerIndex(null);
+    } else if (currentQuestionIndex === 9) {
+      navigation.navigate("ranking", { points });
 
       console.log("sudah diahkir quiz");
     } else {
@@ -178,17 +173,16 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                   }}
                 >
                   <Box
-                    bgColor="white"
-                    borderColor={
+                    bgColor={
                       selectAnswerIndex === index
-
-                        ? timeRemaining <= 0
-                          ? answerTrue
-                            ? "green" // Jika waktu habis dan jawaban benar, gunakan warna hijau
-                            : "red" // Jika waktu habis dan jawaban salah, gunakan warna merah
-                          : "gray" // Jika belum waktu habis, gunakan warna default
-                        : "gray" // Jika belum dipilih, gunakan warna default
+                        ? timeRemaining === 0
+                          ? selectAnswer === currentQuestion?.correctAnswer
+                            ? "green"
+                            : "red"
+                          : "white"
+                        : "white"
                     }
+                    borderColor={"gray"}
                     borderWidth={3}
                     height={55}
                     borderRadius={"$md"}
@@ -209,12 +203,15 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                         right={10}
                         gap={2}
                       >
-                        <Card
+                        {/* <Card
                           rounded={"$full"}
                           width={"$3"}
                           height={"$3"}
                           bg="#9BCF53"
-                        ></Card>
+                        ></Card> */}
+                        <Avatar w={50} h={50}>
+                          <AvatarImage alt="avatar" source={avatar} />
+                        </Avatar>
                       </Box>
                     )}
                   </Box>
@@ -231,10 +228,10 @@ const Quiz = ({ navigation }: { navigation: any }) => {
             alignItems="center"
           >
             <Text fontSize={"$sm"} color="white" mb={3}>
-              {currentQuestionIndex + 1}/20 Pertanyaan
+              {currentQuestionIndex + 1}/10 Pertanyaan
             </Text>
             <Progress.Bar
-              progress={(currentQuestionIndex + 1) / question.length}
+              progress={(currentQuestionIndex + 1) / 10}
               width={280}
               color="green"
               animated

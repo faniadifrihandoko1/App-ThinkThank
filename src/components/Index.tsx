@@ -5,7 +5,7 @@ import { data } from "../interface/data";
 import User from "./User";
 import SearchBox from "./SearchBox";
 
-type Props = {};
+
 
 const Index = () => {
   const [data, setData] = useState<data>();
@@ -38,4 +38,3 @@ const Index = () => {
 
 export default Index;
 
-const styles = StyleSheet.create({});

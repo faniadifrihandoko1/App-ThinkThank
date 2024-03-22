@@ -3,15 +3,10 @@ import {
   ButtonText,
   Center,
   Modal,
-  Icon,
   ModalBackdrop,
-  ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader,
   Text,
-  CloseIcon,
   Pressable,
   Box,
   Card,
@@ -21,8 +16,6 @@ import React, { useState } from "react";
 
 import { FontAwesome } from "@expo/vector-icons";
 import { moderateScale as ms } from "react-native-size-matters";
-
-import { WebView } from 'react-native-webview';
 
 import dataModalDiamond, { IDiamond } from "../mocks/dataModalDiamond";
 import { ListRenderItem, FlatList } from "react-native";
@@ -51,46 +44,14 @@ const Diamond = ({ navigation }: any) => {
     }
   };
 
-  // PAYMENT GATEWAY EMBEDMODE
-
-  // const handlePayment = () => {
-  //   const handlePress = () => {
-  //     const snap = (window as any).snap;
-  //     if (snap) {
-  //       snap.embed("TRANSACTION_TOKEN_HERE", {
-  //         embedId: "snap-container",
-  //         onSuccess: (result: any) => {
-  //           alert("Payment success!");
-  //           console.log(result);
-  //         },
-  //         onPending: (result: any) => {
-  //           alert("Waiting for your payment!");
-  //           console.log(result);
-  //         },
-  //         onError: (result: any) => {
-  //           alert("Payment failed!");
-  //           console.log(result);
-  //         },
-  //         onClose: () => {
-  //           alert("You closed the popup without finishing the payment");
-  //         },
-  //       });
-  //     }
-  //   };
-
-  //   return handlePress;
-  // };
-
-  // PAYMENT GATEWAY EMBEDMODE
-
-  const Item = ({ item }: { item: IDiamond }) => (
+  const Item = ({ item, index } : { item: IDiamond, index: number }) => (
     <StyledPressable
+      key={index}
       className={`
               active:scale-110
             hover:bg-slate-950
               m-2 `}
       onPress={() => handleDiamond(item.id, item.diamond || 0)}
-      // onPress={() => handlePayment()}
     >
       <Card
         w={"$24"}
@@ -112,6 +73,7 @@ const Diamond = ({ navigation }: any) => {
           source={{
             uri: item.image,
           }}
+          alt="image"
         />
         {selectedDiamond === item.id && (
           <Box
@@ -139,7 +101,7 @@ const Diamond = ({ navigation }: any) => {
   );
 
   const renderItem: ListRenderItem<IDiamond> = ({ item }) => (
-    <Item item={item} />
+    <Item item={item} index={item.id} />
   );
   return (
     <>
@@ -224,12 +186,6 @@ const Diamond = ({ navigation }: any) => {
                 <ButtonText>CheckOut</ButtonText>
               </Button>
             </ModalFooter>
-            {/* <View>
-              <Pressable  onPress={handlePayment()} />
-              <WebView
-                source={{ uri: "https://app.stg.midtrans.com/snap/snap.js" }}
-              />
-            </View> */}
           </ModalContent>
         </Modal>
       </Center>
