@@ -1,24 +1,8 @@
 import React, { useState } from "react";
-import {
-  ListRenderItem,
-  FlatList,
-  StyleSheet,
-  TextInput,
-} from "react-native";
-import {
-  SafeAreaView,
-  ScrollView,
-  KeyboardAvoidingView,
-  Pressable,
-} from "react-native";
+import { ListRenderItem, FlatList, StyleSheet, TextInput } from "react-native";
+import { ScrollView, KeyboardAvoidingView, Pressable } from "react-native";
 
-import {
-  Input,
-  InputSlot,
-  Image,
-  View,
-  Text,
-} from "@gluestack-ui/themed";
+import { Input, InputSlot, Image, View, Text } from "@gluestack-ui/themed";
 
 import logo from "../../assets/logo.png";
 
@@ -31,7 +15,7 @@ import Background from "../components/Background";
 import SignOut from "../components/SignOut";
 import { useUser } from "@clerk/clerk-expo";
 import UserLogin from "../components/UserLogin";
-import Index from "../components/Index";
+
 import userStore from "../store/user";
 import { styled } from "nativewind";
 const StyledPressable = styled(Pressable);
@@ -69,14 +53,20 @@ const Home = ({ navigation }: any) => {
     }
   };
 
-  const postProfile = async (e: React.FormEvent<HTMLInputElement>) => {};
   const handleAvatar = (avatarId: number, image: string) => {
     setSelectedAvatar(avatarId);
     setAvatar(image);
   };
 
-  const AvatarDummy = ({ item }: { item: IDummyAvatar }) => (
+  const AvatarDummy = ({
+    item,
+    index,
+  }: {
+    item: IDummyAvatar;
+    index: number;
+  }) => (
     <StyledPressable
+      key={index}
       className={`
           active:scale-110
     hover:bg-slate-950`}
@@ -84,6 +74,7 @@ const Home = ({ navigation }: any) => {
     >
       <Avatar w={70} h={70}>
         <AvatarImage
+          alt="avatar"
           source={{
             uri: item.image,
           }}
@@ -102,8 +93,8 @@ const Home = ({ navigation }: any) => {
       </Avatar>
     </StyledPressable>
   );
-  const renderItem: ListRenderItem<IDummyAvatar> = ({ item }) => (
-    <AvatarDummy item={item} />
+  const renderItem: ListRenderItem<IDummyAvatar> = ({ item, index }) => (
+    <AvatarDummy item={item} index={index} />
   );
 
   return (
@@ -118,7 +109,11 @@ const Home = ({ navigation }: any) => {
                 marginBottom={60}
               >
                 <View style={{ alignItems: "center", marginTop: 60 }}>
-                  <Image style={{ width: 260, height: 200 }} source={logo} />
+                  <Image
+                    style={{ width: 260, height: 200 }}
+                    alt="logo"
+                    source={logo}
+                  />
                   <Text
                     style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
                   >
@@ -138,9 +133,12 @@ const Home = ({ navigation }: any) => {
                   justifyContent="center"
                 >
                   <FlatList
+                    scrollEnabled={false}
                     data={dataAvatar}
                     renderItem={renderItem}
-                    keyExtractor={(_, index) => Index.toString()}
+                    keyExtractor={(recipe, index) =>
+                      `recipe-${index}-${recipe.id.toString()}`
+                    }
                     contentContainerStyle={{ alignItems: "center" }}
                     numColumns={4}
                   />
@@ -195,7 +193,6 @@ const styles = StyleSheet.create({
     color: "white",
   },
   text: {
-    fontFamily: "roboto",
     fontWeight: "bold",
     color: "black",
     textAlign: "center",

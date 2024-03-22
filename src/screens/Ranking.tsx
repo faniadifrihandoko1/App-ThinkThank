@@ -8,6 +8,8 @@ import juara3 from "../../assets/juara03.png";
 import img1 from "../../assets/bapaksripal.png";
 import { Avatar } from "@gluestack-ui/themed";
 import { FontAwesome5 } from "@expo/vector-icons";
+import lottie from "lottie-react-native";
+import LottieView from "lottie-react-native";
 
 const Ranking = ({ navigation }: { navigation: any }) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
@@ -238,6 +240,8 @@ const Ranking = ({ navigation }: { navigation: any }) => {
           </Button>
         </Box>
       </View>
+      <LottieView source={require ("../../assets/Animation - 1711008645448.json")} autoPlay loop style={{position: "absolute", backgroundColor: "transparent", top: 100, left: 0, right: 0, bottom: 370}}  />
+      <LottieView source={require ("../../assets/Animation - 1711007960370.json")} autoPlay loop style={{position: "absolute", backgroundColor: "transparent", top: 100, left: 0, right: 0, bottom: 370}}  />
     </Background>
   );
 };

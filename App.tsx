@@ -1,4 +1,3 @@
-
 import { StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { GluestackUIProvider } from "@gluestack-ui/themed";
@@ -10,11 +9,8 @@ import * as SecureStore from "expo-secure-store";
 
 import LoginPage from "./src/screens/LoginPage";
 
-
-
 const tokenCache: any = {
   async getToken(key: string) {
-
     try {
       return SecureStore.getItemAsync(key);
     } catch (err) {
@@ -31,7 +27,6 @@ const tokenCache: any = {
 };
 
 export default function App() {
-  const Stack = createNativeStackNavigator();
   return (
     <ClerkProvider
       tokenCache={tokenCache}
@@ -48,12 +43,3 @@ export default function App() {
     </ClerkProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
