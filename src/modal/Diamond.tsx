@@ -3,15 +3,10 @@ import {
   ButtonText,
   Center,
   Modal,
-  Icon,
   ModalBackdrop,
-  ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader,
   Text,
-  CloseIcon,
   Pressable,
   Box,
   Card,
@@ -51,40 +46,11 @@ const Diamond = ({ navigation }: any) => {
     }
   };
 
-  // PAYMENT GATEWAY EMBEDMODE
 
-  // const handlePayment = () => {
-  //   const handlePress = () => {
-  //     const snap = (window as any).snap;
-  //     if (snap) {
-  //       snap.embed("TRANSACTION_TOKEN_HERE", {
-  //         embedId: "snap-container",
-  //         onSuccess: (result: any) => {
-  //           alert("Payment success!");
-  //           console.log(result);
-  //         },
-  //         onPending: (result: any) => {
-  //           alert("Waiting for your payment!");
-  //           console.log(result);
-  //         },
-  //         onError: (result: any) => {
-  //           alert("Payment failed!");
-  //           console.log(result);
-  //         },
-  //         onClose: () => {
-  //           alert("You closed the popup without finishing the payment");
-  //         },
-  //       });
-  //     }
-  //   };
+  const Item = ({ item, index } : { item: IDiamond, index: number }) => (
 
-  //   return handlePress;
-  // };
-
-  // PAYMENT GATEWAY EMBEDMODE
-
-  const Item = ({ item }: { item: IDiamond }) => (
     <StyledPressable
+      key={index}
       className={`
               active:scale-110
             hover:bg-slate-950
@@ -112,6 +78,7 @@ const Diamond = ({ navigation }: any) => {
           source={{
             uri: item.image,
           }}
+          alt="image"
         />
         {selectedDiamond === item.id && (
           <Box
@@ -139,7 +106,7 @@ const Diamond = ({ navigation }: any) => {
   );
 
   const renderItem: ListRenderItem<IDiamond> = ({ item }) => (
-    <Item item={item} />
+    <Item item={item} index={item.id} />
   );
   return (
     <>

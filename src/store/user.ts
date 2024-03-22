@@ -39,9 +39,11 @@ const userStore = create<UserStore>((set) => ({
   setAvatar: (avatar: string) =>
     set((state) => ({ user: { ...state.user, avatar } })),
   setDiamond: (diamond: number) =>
+
     set((state) => ({
       user: { ...state.user, diamond: state.user.diamond + diamond },
     })),
+
   setDiamondMin: (diamond: number) =>
     set((state) => ({
       user: { ...state.user, diamond: state.user.diamond - diamond },

@@ -1,6 +1,17 @@
 import React, { useState } from "react";
-import { ListRenderItem, FlatList, StyleSheet, TextInput } from "react-native";
-import { ScrollView, KeyboardAvoidingView, Pressable } from "react-native";
+
+import {
+  ListRenderItem,
+  FlatList,
+  StyleSheet,
+  TextInput,
+} from "react-native";
+import {
+  ScrollView,
+  KeyboardAvoidingView,
+  Pressable,
+} from "react-native";
+
 
 import { Input, InputSlot, Image, View, Text } from "@gluestack-ui/themed";
 
@@ -10,7 +21,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
 import dataAvatar, { IDummyAvatar } from "../mocks/dataAvatar";
-import { Avatar, AvatarImage, Box, Card } from "@gluestack-ui/themed";
+import { Avatar, AvatarImage, Box } from "@gluestack-ui/themed";
 import Background from "../components/Background";
 import SignOut from "../components/SignOut";
 import { useUser } from "@clerk/clerk-expo";
@@ -58,6 +69,7 @@ const Home = ({ navigation }: any) => {
     setAvatar(image);
   };
 
+
   const AvatarDummy = ({
     item,
     index,
@@ -65,11 +77,12 @@ const Home = ({ navigation }: any) => {
     item: IDummyAvatar;
     index: number;
   }) => (
+
     <StyledPressable
       key={index}
       className={`
           active:scale-110
-    hover:bg-slate-950`}
+    hover:bg-slate-950`}    
       onPress={() => handleAvatar(item.id, item.image)}
     >
       <Avatar w={70} h={70}>
@@ -78,6 +91,7 @@ const Home = ({ navigation }: any) => {
           source={{
             uri: item.image,
           }}
+          alt="image"
         />
         {selectedAvatar === item.id && (
           <Box
@@ -93,7 +107,9 @@ const Home = ({ navigation }: any) => {
       </Avatar>
     </StyledPressable>
   );
+
   const renderItem: ListRenderItem<IDummyAvatar> = ({ item, index }) => (
+
     <AvatarDummy item={item} index={index} />
   );
 
@@ -109,11 +125,9 @@ const Home = ({ navigation }: any) => {
                 marginBottom={60}
               >
                 <View style={{ alignItems: "center", marginTop: 60 }}>
-                  <Image
-                    style={{ width: 260, height: 200 }}
-                    alt="logo"
-                    source={logo}
-                  />
+
+                  <Image style={{ width: 260, height: 200 }} alt="logo" source={logo} />
+
                   <Text
                     style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
                   >
@@ -148,11 +162,6 @@ const Home = ({ navigation }: any) => {
                   <InputSlot pl="$3">
                     <Feather name="edit" size={24} color="white" />
                   </InputSlot>
-                  {/* <InputField
-                    onChange={handleChange}
-                    color="white"
-                    placeholder="Enter your name"
-                  /> */}
                   <TextInput
                     style={{ width: "80%" }}
                     onChangeText={(value) => setNama(value)}

@@ -10,7 +10,7 @@ const User = (props: Props) => {
   return (
     <View className="flex flex-row items-center justify-between px-6 mt-4 space-x-4 ">
       <View className="flex flex-row items-center space-x-4">
-        <Image src={props.src} className="w-10 h-10 rounded-full" />
+        <Image src={props.src} alt="avatar" className="w-10 h-10 rounded-full" />
         <Text className="font-bold">{props.username}</Text>
       </View>
       <Pressable>

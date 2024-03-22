@@ -1,14 +1,17 @@
-import { ProgressBarAndroidBase, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import Background from "../components/Background";
-import { Box, Button, Card, Text } from "@gluestack-ui/themed";
+import { Box, Text,Avatar, AvatarImage } from "@gluestack-ui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
 import IQuestion, { questions as dataQuiz } from "../mocks/dataQuiz";
 import { TouchableWithoutFeedback } from "react-native";
+import userStore from "../store/user";
 
 const Quiz = ({ navigation }: { navigation: any }) => {
   const [question, setQuestion] = React.useState<IQuestion[]>([]);
+
+  const avatar = userStore((state) => state.user.avatar);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(5);
   const [selectAnswerIndex, setSelectAnswerIndex] = React.useState<
@@ -200,12 +203,15 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                         right={10}
                         gap={2}
                       >
-                        <Card
+                        {/* <Card
                           rounded={"$full"}
                           width={"$3"}
                           height={"$3"}
                           bg="#9BCF53"
-                        ></Card>
+                        ></Card> */}
+                        <Avatar w={50} h={50}>
+                          <AvatarImage alt="avatar" source={avatar} />
+                        </Avatar>
                       </Box>
                     )}
                   </Box>

@@ -1,14 +1,16 @@
-import { Animated, Easing, Image, StyleSheet, Text, View } from "react-native";
+
+import { Animated, Easing, Image, Text, View } from "react-native";
 import React, { useEffect, useRef } from "react";
 import Background from "../components/Background";
-import { AvatarImage, Box, Button, Card, HStack } from "@gluestack-ui/themed";
+import { AvatarImage, Box, Button, Card} from "@gluestack-ui/themed";
 import juara2 from "../../assets/juara02.png";
 import juara1 from "../../assets/juara01.png";
 import juara3 from "../../assets/juara03.png";
 import img1 from "../../assets/bapaksripal.png";
 import { Avatar } from "@gluestack-ui/themed";
 import { FontAwesome5 } from "@expo/vector-icons";
-import lottie from "lottie-react-native";
+
+
 import LottieView from "lottie-react-native";
 
 const Ranking = ({ navigation }: { navigation: any }) => {
@@ -165,6 +167,7 @@ const Ranking = ({ navigation }: { navigation: any }) => {
                     item.rank === 1 ? juara1 : item.rank === 2 ? juara2 : juara3
                   }
                   style={{ marginLeft: 20 }}
+                  alt="juara"
                 />
               </Animated.View>
             </Box>
@@ -220,7 +223,9 @@ const Ranking = ({ navigation }: { navigation: any }) => {
             borderColor="$red900"
             borderWidth={1}
             w={"$1/2"}
-            onPress={() => navigation.push("ranking")}
+
+            onPress={() => navigation.navigate("profile")}
+
           >
             <Text style={{ color: "white", fontWeight: "500" }}>
               Back to Home

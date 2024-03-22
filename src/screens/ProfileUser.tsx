@@ -18,11 +18,9 @@ import Background from "../components/Background";
 import logo from "../../assets/logo.png";
 import D from "../../assets/diamond-2.png";
 
-import { styled } from "nativewind";
 import AvatarModal from "../modal/AvatarModal";
 import Diamond from "../modal/Diamond";
 import userStore from "../store/user";
-const StyledPressable = styled(Pressable);
 const ProfileUser = ({ navigation }: any) => {
   const { avatar, diamond, username } = userStore((state) => state.user);
 

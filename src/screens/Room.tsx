@@ -17,12 +17,13 @@ import { moderateScale as ms } from "react-native-size-matters";
 import { io } from "socket.io-client";
 import userStore from "../store/user";
 
-const socket = io("http://192.168.18.25:3000");
+const socket = io("http://192.168.18.17:3000");
 
 const Room = ({ navigation }: any) => {
   const [timer, setTimer] = React.useState(15);
   const [userRoom, setUserRoom] = React.useState([]);
   const username = userStore((state) => state.user.username);
+  const avatar = userStore((state) => state.user.avatar);
   React.useEffect(() => {
     socket.emit("join_room", {
       username: username,
@@ -42,8 +43,9 @@ const Room = ({ navigation }: any) => {
     });
   }, []);
 
-  const Player = ({ item }: { item: IPLayer }) => (
+  const Player = ({ item, index }: any) => (
     <Box
+      key={index}
       p={"$4"}
       height={"auto"}
       px={"$4"}
@@ -54,8 +56,8 @@ const Room = ({ navigation }: any) => {
       backgroundColor="rgba(52, 52, 52, 0.8)"
       flexDirection="row"
     >
-      <Avatar w={50} h={50}>
-        <AvatarImage source="https://i.ibb.co/wCnzdSL/premium-Avatar1.png" />
+      <Avatar w={45} h={45}>
+        <AvatarImage alt="avatar" source={avatar} />
       </Avatar>
       <Text
         px={"$2"}
