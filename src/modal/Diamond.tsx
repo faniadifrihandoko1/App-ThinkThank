@@ -170,7 +170,7 @@ const Diamond = ({ navigation }: any) => {
               justifyContent="center"
               alignItems="center"
             >
-              <Button
+              <Button 
                 w={130}
                 size="sm"
                 action="negative"
@@ -188,15 +188,9 @@ const Diamond = ({ navigation }: any) => {
                 borderWidth="$0"
                 onPress={handleSave}
               >
-                <ButtonText>CheckOut</ButtonText>
+                <ButtonText>Pay</ButtonText>
               </Button>
             </ModalFooter>
-            {/* <View>
-              <Pressable  onPress={handlePayment()} />
-              <WebView
-                source={{ uri: "https://app.stg.midtrans.com/snap/snap.js" }}
-              />
-            </View> */}
           </ModalContent>
         </Modal>
       </Center>

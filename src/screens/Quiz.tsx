@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import Background from "../components/Background";
-import { Box, Text,Avatar, AvatarImage } from "@gluestack-ui/themed";
+import { Box, Text, Avatar, AvatarImage } from "@gluestack-ui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
 import IQuestion, { questions as dataQuiz } from "../mocks/dataQuiz";
@@ -162,40 +162,73 @@ const Quiz = ({ navigation }: { navigation: any }) => {
             mt={10}
           >
             {currentQuestion?.options.map((option, index) => {
+              // Mengecek apakah opsi adalah jawaban yang benar
+              const isCorrectAnswer = index === currentQuestion?.correctAnswer;
+
+              // Mengecek apakah opsi dipilih oleh player
+              const isSelectedAnswer = selectAnswerIndex === index;
+
+              // console.log("isSelectedAnswer:", isSelectedAnswer);
+              // console.log("isCorrectAnswer:", isCorrectAnswer);
+
+              let BGCOLOR = "white";
+
+              // Menetapkan warna latar belakang berdasarkan kondisi:
+              if (timeRemaining === 0) {
+                // Jika waktu habis
+                if (isSelectedAnswer) {
+                    // Jika opsi dipilih
+                    BGCOLOR = selectAnswer === currentQuestion?.correctAnswer ? "green" : "red";
+                } else if (isCorrectAnswer && !isSelectedAnswer) {
+                    // Jika opsi tidak dipilih dan merupakan jawaban yang benar
+                    BGCOLOR = "green";
+                } else if (!isCorrectAnswer && isSelectedAnswer && index !== currentQuestion?.correctAnswer) {
+                    // Jika opsi tidak dipilih dan bukan merupakan jawaban yang benar
+                    BGCOLOR = "green";
+                }
+            }
+              // bgColor={
+              //   selectAnswerIndex === index
+              //     ? timeRemaining === 0
+              //       ? selectAnswer === currentQuestion?.correctAnswer
+              //         ? "green"
+              //         : "red"
+              //       : "white"
+              //     : "white"
+              // }
+
+              
+
               return (
                 <TouchableWithoutFeedback
                   key={index}
                   onPress={() => {
                     if (timeRemaining > 0) {
-                      // Memeriksa apakah waktu masih berjalan
+                      // Memeriksa apakah waktu masih berjalan sebelum menangani jawaban
                       handleAnswer(index, option);
                     }
                   }}
                 >
+                  {/* Kotak untuk opsi jawaban */}
                   <Box
-                    bgColor={
-                      selectAnswerIndex === index
-                        ? timeRemaining === 0
-                          ? selectAnswer === currentQuestion?.correctAnswer
-                            ? "green"
-                            : "red"
-                          : "white"
-                        : "white"
-                    }
+                    bgColor={BGCOLOR}
                     borderColor={"gray"}
                     borderWidth={3}
                     height={55}
                     borderRadius={"$md"}
                     justifyContent="center"
                     paddingHorizontal={"$4"}
+                    style={{ marginBottom: 10 }}
                   >
+                    {/* Konten opsi jawaban */}
                     <Box width={"100%"}>
                       <Text color="black" fontSize={16}>
                         {option}
                       </Text>
                     </Box>
-                    {/* Jika user memilih maka menampilkan avatar di tiap colom jawaban yang dia pilih */}
-                    {selectAnswerIndex === index && (
+
+                    {/* Menampilkan avatar jika opsi dipilih oleh pengguna */}
+                    {isSelectedAnswer && (
                       <Box
                         position="absolute"
                         display="flex"
@@ -203,13 +236,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                         right={10}
                         gap={2}
                       >
-                        {/* <Card
-                          rounded={"$full"}
-                          width={"$3"}
-                          height={"$3"}
-                          bg="#9BCF53"
-                        ></Card> */}
-                        <Avatar w={50} h={50}>
+                        <Avatar w={30} h={30}>
                           <AvatarImage alt="avatar" source={avatar} />
                         </Avatar>
                       </Box>
@@ -218,6 +245,21 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                 </TouchableWithoutFeedback>
               );
             })}
+
+            {/* Jika user memilih maka menampilkan avatar di tiap colom jawaban yang dia pilih */}
+            {/* {selectAnswerIndex === index && (
+              <Box
+                position="absolute"
+                display="flex"
+                flexDirection="row"
+                right={10}
+                gap={2}
+              >
+                <Avatar w={30} h={30}>
+                  <AvatarImage alt="avatar" source={avatar} />
+                </Avatar>
+              </Box>
+            )} */}
           </Box>
 
           <Box

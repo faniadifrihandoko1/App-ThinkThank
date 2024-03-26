@@ -21,6 +21,7 @@ import D from "../../assets/diamond-2.png";
 import AvatarModal from "../modal/AvatarModal";
 import Diamond from "../modal/Diamond";
 import userStore from "../store/user";
+import SignOut from "../components/SignOut";
 const ProfileUser = ({ navigation }: any) => {
   const { avatar, diamond, username } = userStore((state) => state.user);
 
@@ -119,7 +120,7 @@ const ProfileUser = ({ navigation }: any) => {
         <Box display="flex" justifyContent="center" alignItems="center" mt={30}>
           <Image alt={"cube"} width={300} height={300} source={cube}></Image>
         </Box>
-        <Box px={50} mt={30}>
+        <Box px={50} mt={30} display="flex" justifyContent="center" alignItems="center">
           <Box w={"100%"} rounded={"$xl"} bg="#4F46E4" px={30} py={20}>
             <Pressable
               bg="#F8BD00"
@@ -131,6 +132,7 @@ const ProfileUser = ({ navigation }: any) => {
               <Text style={styles.buttonText}>mulai quiz</Text>
             </Pressable>
           </Box>
+          <SignOut />
         </Box>
       </View>
     </Background>

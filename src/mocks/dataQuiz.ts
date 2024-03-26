@@ -24,7 +24,7 @@ export const questions: IQuestion[] = [
     question:
       "Jika semua kucing adalah hewan, dan Mimi adalah kucing, maka Mimi adalah?",
     options: ["Anjing", "Burung", "Ikan", "Hewan"],
-    correctAnswer: "Ikan",
+    correctAnswer: "Hewan",
   },
   {
     id: 4,

@@ -82,7 +82,7 @@ const Home = ({ navigation }: any) => {
       key={index}
       className={`
           active:scale-110
-    hover:bg-slate-950`}    
+    hover:bg-slate-950 p-2`}    
       onPress={() => handleAvatar(item.id, item.image)}
     >
       <Avatar w={70} h={70}>
@@ -91,7 +91,6 @@ const Home = ({ navigation }: any) => {
           source={{
             uri: item.image,
           }}
-          alt="image"
         />
         {selectedAvatar === item.id && (
           <Box
@@ -126,7 +125,7 @@ const Home = ({ navigation }: any) => {
               >
                 <View style={{ alignItems: "center", marginTop: 60 }}>
 
-                  <Image style={{ width: 260, height: 200 }} alt="logo" source={logo} />
+                  <Image style={{ width: 260, height: 200, }} alt="logo" source={logo} />
 
                   <Text
                     style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
@@ -136,13 +135,11 @@ const Home = ({ navigation }: any) => {
                   <UserLogin />
                 </View>
                 <Box
-                  my={30}
+                  my={20}
                   bg="transparent"
                   display="flex"
                   flexDirection="row"
                   flexWrap="wrap"
-                  gap={8}
-                  p={1}
                   maxWidth={"100%"}
                   justifyContent="center"
                 >
@@ -179,7 +176,7 @@ const Home = ({ navigation }: any) => {
                 >
                   <Text style={styles.text}>Continue</Text>
                 </Pressable>
-                <SignOut />
+                <SignOut /> 
               </View>
             </Box>
           </View>
