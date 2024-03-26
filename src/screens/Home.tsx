@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 
-import {
-  ListRenderItem,
-  FlatList,
-  StyleSheet,
-  TextInput,
-} from "react-native";
-import {
-  ScrollView,
-  KeyboardAvoidingView,
-  Pressable,
-} from "react-native";
-
+import { ListRenderItem, FlatList, StyleSheet, TextInput } from "react-native";
+import { ScrollView, KeyboardAvoidingView, Pressable } from "react-native";
 
 import { Input, InputSlot, Image, View, Text } from "@gluestack-ui/themed";
 
@@ -69,7 +59,6 @@ const Home = ({ navigation }: any) => {
     setAvatar(image);
   };
 
-
   const AvatarDummy = ({
     item,
     index,
@@ -77,12 +66,11 @@ const Home = ({ navigation }: any) => {
     item: IDummyAvatar;
     index: number;
   }) => (
-
     <StyledPressable
       key={index}
       className={`
           active:scale-110
-    hover:bg-slate-950`}    
+    hover:bg-slate-950`}
       onPress={() => handleAvatar(item.id, item.image)}
     >
       <Avatar w={70} h={70}>
@@ -91,7 +79,6 @@ const Home = ({ navigation }: any) => {
           source={{
             uri: item.image,
           }}
-          alt="image"
         />
         {selectedAvatar === item.id && (
           <Box
@@ -109,7 +96,6 @@ const Home = ({ navigation }: any) => {
   );
 
   const renderItem: ListRenderItem<IDummyAvatar> = ({ item, index }) => (
-
     <AvatarDummy item={item} index={index} />
   );
 
@@ -125,8 +111,11 @@ const Home = ({ navigation }: any) => {
                 marginBottom={60}
               >
                 <View style={{ alignItems: "center", marginTop: 60 }}>
-
-                  <Image style={{ width: 260, height: 200 }} alt="logo" source={logo} />
+                  <Image
+                    style={{ width: 260, height: 200 }}
+                    alt="logo"
+                    source={logo}
+                  />
 
                   <Text
                     style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
