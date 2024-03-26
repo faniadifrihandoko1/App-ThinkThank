@@ -5,3 +5,8 @@ export type data = {
   login: string;
   public_repos: number | string;
 };
+
+export type IQuiz = {
+  options: string[];
+  question: string;
+};

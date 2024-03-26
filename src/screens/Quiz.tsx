@@ -1,93 +1,128 @@
 import { StyleSheet, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Background from "../components/Background";
-import { Box, Text,Avatar, AvatarImage } from "@gluestack-ui/themed";
+import { Box, Text, Avatar, AvatarImage } from "@gluestack-ui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
 import IQuestion, { questions as dataQuiz } from "../mocks/dataQuiz";
 import { TouchableWithoutFeedback } from "react-native";
 import userStore from "../store/user";
+import { io } from "socket.io-client";
+import { IQuiz } from "../interface/data";
+import { ActivityIndicator } from "react-native";
+import { Card } from "@gluestack-ui/themed";
 
+interface QuizData {
+  options: string[];
+  question: string;
+  answer: string;
+}
+
+const socket = io("http://192.168.18.25:3000");
 const Quiz = ({ navigation }: { navigation: any }) => {
-  const [question, setQuestion] = React.useState<IQuestion[]>([]);
-
+  const [question, setQuestion] = React.useState<QuizData>({
+    options: [],
+    question: "",
+    answer: "",
+  });
+  const [isQuestion, setIsQuestions] = React.useState(false);
+  const [validation, setValidation] = React.useState(false);
+  const [isFinish, setIsFinish] = React.useState(false);
+  const [isCorrect, setIsCorrect] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [lengthQuestion, setLengthQuestion] = React.useState(0);
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
+    null
+  );
+  const [timer, setTimer] = React.useState(15);
+  const [answer, setAnswer] = React.useState("");
+  const [point, setPoint] = React.useState(0);
   const avatar = userStore((state) => state.user.avatar);
-
-  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(5);
-  const [selectAnswerIndex, setSelectAnswerIndex] = React.useState<
-    number | null
-  >(null);
-  const [selectAnswer, setSelectAnswer] = React.useState("");
-  const [timeRemaining, setTimeRemaining] = React.useState(10); // Waktu dalam detik
-
-  const [timerRunning, setTimerRunning] = React.useState(false);
-  const [points, setPoints] = React.useState(0);
-
   React.useEffect(() => {
-    setQuestion(dataQuiz.slice(0, 10));
-    setCurrentQuestionIndex(0);
-    startTimer();
+    const timerId = setTimeout(() => {
+      setIsLoading(false); // Setelah 5 detik, set isLoading menjadi false
+    }, 8000);
+
+    return () => clearTimeout(timerId); // Membersihkan timer jika komponen unmount
   }, []);
 
   React.useEffect(() => {
-    if (timerRunning) {
-      const timer = setTimeout(() => {
-        if (timeRemaining > 0) {
-          setTimeRemaining((prevTime) => prevTime - 1);
-        } else {
-          handleTimeUp();
-        }
-      }, 1000);
+    socket.emit("dataPlayers", socket.id);
+    socket.on("game", (data: any) => {
+      // console.log(`data question`, data);
+      setQuestion({
+        options: data.options,
+        question: data.question,
+        answer: data.correctAnswer,
+      });
+    });
 
-      return () => clearTimeout(timer);
+    socket.on("countdownQuestions", (second) => {
+      console.log(second);
+      setTimer(second);
+      if (second === 15) {
+        setIsQuestions(true);
+      } else if (second === 5) {
+        setValidation(true);
+      } else if (second === 0) {
+        setValidation(false);
+      }
+      // if (second === 0) {
+      //   setSelectedAnswerIndex(null);
+      // } else if (second === 1 && answer === question.answer) {
+      //   setPoint((prevscore) => prevscore + 1000);
+      // }
+    });
+
+    console.log("point", point);
+    socket.on("totalQuestions", (length) => {
+      console.log(length);
+      setLengthQuestion(length);
+      if (length === 9) {
+        setIsFinish(true);
+      }
+      if (!isFinish && length === 0) {
+        socket.on("disconnect", () => {
+          console.log("sudah keluar");
+        });
+        navigation.navigate("ranking");
+      }
+    });
+
+    socket.on("noMoreQuestions", () => {
+      navigation.navigate("ranking");
+    });
+
+    if (timer === 2 && answer === question.answer) {
+      setPoint(point + 1000);
     }
-  }, [timeRemaining, timerRunning]);
+  }, []);
 
-  const handleTimeUp = () => {
-    const correctAnswerIndex = currentQuestion?.correctAnswer;
-    if (selectAnswer === correctAnswerIndex) {
-      setPoints(points + 1000);
-      // setTimerRunning(false); // Berhenti timer
-    } else {
+  useEffect(() => {
+    if (answer == question.answer) {
+      setIsCorrect(true);
+    } else if (answer !== question.answer) {
+      setIsCorrect(false);
     }
-    setTimeout(nextQuestion, 2000); // Pindah ke pertanyaan berikutnya
-  };
 
-  const startTimer = () => {
-    setTimerRunning(true);
-  };
-
-  const resetTimer = () => {
-    setTimeRemaining(5);
-  };
-
-  const currentQuestion = question[currentQuestionIndex];
-
-  const nextQuestion = () => {
-    if (currentQuestionIndex < question.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
-      resetTimer();
-      setSelectAnswerIndex(null);
-    } else if (currentQuestionIndex === 9) {
-      navigation.navigate("ranking", { points });
-
-      console.log("sudah diahkir quiz");
-    } else {
-      setCurrentQuestionIndex(0);
+    if (validation && isCorrect && answer) {
+      setPoint(point + 1000);
     }
+  });
+
+  const handleSubmit = (index: number, answer: string) => {
+    setSelectedAnswerIndex(index);
+    console.log(`jawaban`, answer);
+    setAnswer(answer);
   };
 
-  const handleAnswer = (answer: number, option: string) => {
-    setSelectAnswerIndex(answer);
-    setSelectAnswer(option);
-    if (answer === currentQuestion?.correctAnswer) {
-      setPoints(points + 1000);
-      // alert("jawaban benar");
-      // nextQuestion();
-    } else {
-      // alert("jawaban salah");
-    }
-  };
+  // if (isLoading) {
+  //   return (
+  //     <View style={[styles.loadingContainer, styles.horizontal]}>
+  //       <ActivityIndicator size="large" color="#0000ff" />
+  //     </View>
+  //   );
+  // }
 
   return (
     <Background>
@@ -100,7 +135,6 @@ const Quiz = ({ navigation }: { navigation: any }) => {
         }}
       >
         <Box
-          // maxHeight={"$4/6"}
           bg="black"
           height={"$4/5"}
           borderColor="white"
@@ -121,13 +155,13 @@ const Quiz = ({ navigation }: { navigation: any }) => {
             >
               <FontAwesome name="trophy" size={22} color="#FFE15D" />
               <Text color="white" fontSize={20} fontWeight="bold">
-                {points}
+                {point}
               </Text>
             </Box>
           </Box>
           <Box justifyContent="center" alignItems="center" marginTop={20}>
             <Text color="#9BCF53" fontSize={25} fontWeight="bold">
-              00:{timeRemaining < 10 ? `0${timeRemaining}` : timeRemaining}
+              00:{timer < 10 ? `0${timer}` : timer}
             </Text>
           </Box>
           <Box
@@ -144,14 +178,18 @@ const Quiz = ({ navigation }: { navigation: any }) => {
               maxHeight: "25%",
             }}
           >
-            <Text
-              color="white"
-              fontSize={16}
-              fontWeight="bold"
-              textAlign="center"
-            >
-              {currentQuestion?.question}
-            </Text>
+            {isLoading ? (
+              <ActivityIndicator size="large" color="#0000ff" />
+            ) : (
+              <Text
+                color="white"
+                fontSize={16}
+                fontWeight="bold"
+                textAlign="center"
+              >
+                {question.question}
+              </Text>
+            )}
           </Box>
 
           <Box
@@ -161,27 +199,36 @@ const Quiz = ({ navigation }: { navigation: any }) => {
             gap={15}
             mt={10}
           >
-            {currentQuestion?.options.map((option, index) => {
+            {question.options.map((option, index) => {
               return (
                 <TouchableWithoutFeedback
                   key={index}
                   onPress={() => {
-                    if (timeRemaining > 0) {
-                      // Memeriksa apakah waktu masih berjalan
-                      handleAnswer(index, option);
+                    if (timer > 3) {
+                      handleSubmit(index, option);
                     }
                   }}
                 >
                   <Box
                     bgColor={
-                      selectAnswerIndex === index
-                        ? timeRemaining === 0
-                          ? selectAnswer === currentQuestion?.correctAnswer
-                            ? "green"
-                            : "red"
-                          : "white"
+                      isCorrect && answer == option && validation
+                        ? "#4caf50"
+                        : !isCorrect && answer == option && validation
+                        ? "#f44336"
+                        : option == question.answer && validation
+                        ? "#4caf50"
                         : "white"
                     }
+                    // bgColor={
+                    //   selectedAnswerIndex === index
+                    //     ? timer <= 3 && timer > 0
+                    //       ? answer === option
+                    //         ? "green"
+                    //         : "red"
+                    //       : "white"
+                    //     : "white"
+                    // }
+                    width={"100%"}
                     borderColor={"gray"}
                     borderWidth={3}
                     height={55}
@@ -190,12 +237,16 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                     paddingHorizontal={"$4"}
                   >
                     <Box width={"100%"}>
-                      <Text color="black" fontSize={16}>
-                        {option}
-                      </Text>
+                      {isLoading ? (
+                        <ActivityIndicator size="large" color="#0000ff" />
+                      ) : (
+                        <Text color="black" fontSize={16}>
+                          {option}
+                        </Text>
+                      )}
                     </Box>
                     {/* Jika user memilih maka menampilkan avatar di tiap colom jawaban yang dia pilih */}
-                    {selectAnswerIndex === index && (
+                    {selectedAnswerIndex === index && (
                       <Box
                         position="absolute"
                         display="flex"
@@ -203,13 +254,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                         right={10}
                         gap={2}
                       >
-                        {/* <Card
-                          rounded={"$full"}
-                          width={"$3"}
-                          height={"$3"}
-                          bg="#9BCF53"
-                        ></Card> */}
-                        <Avatar w={50} h={50}>
+                        <Avatar w={30} h={30}>
                           <AvatarImage alt="avatar" source={avatar} />
                         </Avatar>
                       </Box>
@@ -228,20 +273,16 @@ const Quiz = ({ navigation }: { navigation: any }) => {
             alignItems="center"
           >
             <Text fontSize={"$sm"} color="white" mb={3}>
-              {currentQuestionIndex + 1}/10 Pertanyaan
+              {lengthQuestion}/10 Pertanyaan
             </Text>
             <Progress.Bar
-              progress={(currentQuestionIndex + 1) / 10}
+              progress={lengthQuestion / 10}
               width={280}
               color="green"
               animated
               borderColor="grey"
             />
           </Box>
-          {/* <Button
-            style={{ height: "5%" }}
-            onPress={() => nextQuestion()}
-          ></Button> */}
         </Box>
       </View>
     </Background>
@@ -250,4 +291,14 @@ const Quiz = ({ navigation }: { navigation: any }) => {
 
 export default Quiz;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
+  },
+});
