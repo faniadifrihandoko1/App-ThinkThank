@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Background from "../components/Background";
 import { Box, Text, Avatar, AvatarImage } from "@gluestack-ui/themed";
 import { FontAwesome } from "@expo/vector-icons";
@@ -25,12 +25,8 @@ const Quiz = ({ navigation }: { navigation: any }) => {
     question: "",
     answer: "",
   });
-  const [isQuestion, setIsQuestions] = React.useState(false);
-  const [validation, setValidation] = React.useState(false);
-  const [isFinish, setIsFinish] = React.useState(false);
-  const [isCorrect, setIsCorrect] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [lengthQuestion, setLengthQuestion] = React.useState(0);
+  const [lengthQuestion, setLengthQuestion] = React.useState(10);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
     null
   );
@@ -49,66 +45,36 @@ const Quiz = ({ navigation }: { navigation: any }) => {
   React.useEffect(() => {
     socket.emit("dataPlayers", socket.id);
     socket.on("game", (data: any) => {
-      // console.log(`data question`, data);
+      console.log(`data question`, data);
       setQuestion({
         options: data.options,
         question: data.question,
-        answer: data.correctAnswer,
+        answer: data.answer,
       });
     });
 
     socket.on("countdownQuestions", (second) => {
       console.log(second);
       setTimer(second);
-      if (second === 15) {
-        setIsQuestions(true);
-      } else if (second === 5) {
-        setValidation(true);
-      } else if (second === 0) {
-        setValidation(false);
+      console.log("anser:", answer);
+      console.log("question answer:", question.answer);
+      console.log("test", answer == question.answer);
+
+      if (second === 0) {
+        setSelectedAnswerIndex(null);
       }
-      // if (second === 0) {
-      //   setSelectedAnswerIndex(null);
-      // } else if (second === 1 && answer === question.answer) {
-      //   setPoint((prevscore) => prevscore + 1000);
-      // }
     });
 
     console.log("point", point);
-    socket.on("totalQuestions", (length) => {
-      console.log(length);
-      setLengthQuestion(length);
-      if (length === 9) {
-        setIsFinish(true);
-      }
-      if (!isFinish && length === 0) {
-        socket.on("disconnect", () => {
-          console.log("sudah keluar");
-        });
-        navigation.navigate("ranking");
-      }
+    socket.on("totalQuestions", (data) => {
+      // console.log(data);
+      setLengthQuestion(data);
     });
 
     socket.on("noMoreQuestions", () => {
       navigation.navigate("ranking");
     });
-
-    if (timer === 2 && answer === question.answer) {
-      setPoint(point + 1000);
-    }
   }, []);
-
-  useEffect(() => {
-    if (answer == question.answer) {
-      setIsCorrect(true);
-    } else if (answer !== question.answer) {
-      setIsCorrect(false);
-    }
-
-    if (validation && isCorrect && answer) {
-      setPoint(point + 1000);
-    }
-  });
 
   const handleSubmit = (index: number, answer: string) => {
     setSelectedAnswerIndex(index);
@@ -211,23 +177,19 @@ const Quiz = ({ navigation }: { navigation: any }) => {
                 >
                   <Box
                     bgColor={
-                      isCorrect && answer == option && validation
-                        ? "#4caf50"
-                        : !isCorrect && answer == option && validation
-                        ? "#f44336"
-                        : option == question.answer && validation
-                        ? "#4caf50"
+                      // selectedAnswerIndex === index
+                      //   ? answer === option
+                      //     ? "green"
+                      //     : "red"
+                      //   : "white"
+                      selectedAnswerIndex === index
+                        ? timer === 3 && timer > 0
+                          ? answer === question.answer // Menggunakan === untuk perbandingan ketat
+                            ? "green"
+                            : "red"
+                          : "white"
                         : "white"
                     }
-                    // bgColor={
-                    //   selectedAnswerIndex === index
-                    //     ? timer <= 3 && timer > 0
-                    //       ? answer === option
-                    //         ? "green"
-                    //         : "red"
-                    //       : "white"
-                    //     : "white"
-                    // }
                     width={"100%"}
                     borderColor={"gray"}
                     borderWidth={3}
@@ -276,7 +238,7 @@ const Quiz = ({ navigation }: { navigation: any }) => {
               {lengthQuestion}/10 Pertanyaan
             </Text>
             <Progress.Bar
-              progress={lengthQuestion / 10}
+              progress={10 / lengthQuestion}
               width={280}
               color="green"
               animated
